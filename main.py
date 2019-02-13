@@ -1,26 +1,30 @@
 # -*- coding: utf-8 -*
-import json
-from datas_mgmt import *
-from database_mgmt import *
+import datas_manager
+import database_manager
 
 
 def main():
     """Main function"""
 
-
+    # Categories put into the database
+    datas_manager.categories_extract()
 
     continue_app = True
 
     while continue_app is True:
         """Application loop"""
 
-        print("Bienvenue sur l'application Pur BEURRE !\nChoisissez un produit que vous souhaitez remplacer par un substitut plus sain...\n ")
+        print(
+            "Bienvenue sur l'application Pur BEURRE !\n"
+            "Choisissez un produit que vous souhaitez remplacer par un substitut plus sain...\n ")
         question_1_over = 0
         while question_1_over == 0:
-            categoy_choice = input("A quelle catégorie appartient votre produit ? insérez le numéro :")
-            try: categoy_choice = int(categoy_choice)
-            except: print("Insérez un chiffre")
-            if type(categoy_choice) is int:
+            category_choice = input("A quelle catégorie appartient votre produit ? insérez le numéro :")
+            try:
+                category_choice = int(category_choice)
+            except ValueError:
+                print("Insérez un chiffre")
+            if type(category_choice) is int:
                 question_1_over = 1
 
         question_2 = True
@@ -33,7 +37,8 @@ def main():
         question_3 = True
         while question_3 is True:
             # Choice of allergies
-            allergies_choice = input("Êtes-vous allergique à un produit ? insérez le numéro (insérez 0 si vous n'êtes pas allergique):")
+            allergies_choice = input(
+                "Êtes-vous allergique à un produit ? insérez le numéro (insérez 0 si vous n'êtes pas allergique):")
             # vérifier si la variable est bien un int
             # si le produit correspond à celles affichées on sort de la boucle
 

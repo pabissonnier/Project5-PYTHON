@@ -1,18 +1,17 @@
 import mysql.connector
-from mysql.connector import Error
-from mysql.connector import errorcode
 
 
-def catgories_display(category_number, category_name):
+def categories_display(category_name):
     """ Connection to the database and put categories in categories table """
 
-    datas_connect = mysql.connector.connect(user="root", password = "458127", host = "localhost", database = "purbeurre")
+    datas_connect = mysql.connector.connect(user="root", password="458127",
+                                            host="localhost", database="purbeurre",
+                                            auth_plugin='caching_sha2_password')
     cursor = datas_connect.cursor()
 
-    sql_insertion = "INSERT INTO 'categories' ('id', 'name') VALUES (%s, %s)",  (category_number, category_name)
-    result = cursor.execute(sql_insertion)
-    datas_connect.commit()
-    print("Datas intégrées")
+    query = "INSERT INTO 'category' ('name') VALUES (%s)"
+    cursor.execute(query, category_name)
 
     datas_connect.close()
+
 
