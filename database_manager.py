@@ -12,7 +12,7 @@ def categories_to_database(category_name):
     cursor = cnx.cursor()
 
     for element in category_name:
-        query = "INSERT INTO category(nom) VALUES (%s)"
+        query = "INSERT INTO category(name) VALUES (%s)"
         cursor.execute(query, element)
 
         cnx.commit()
@@ -30,7 +30,7 @@ def categories_to_database(category_name):
             print("MySQL connection is closed")"""
 
 
-def products_to_database(category):
+def products_to_database(category_name):
     """ Puts products into the catabase """
     cnx = mysql.connector.connect(user="root", password="458127",
                                             host="localhost", database="purbeurre",
@@ -45,6 +45,7 @@ def products_to_database(category):
         cnx.commit()
 
     print("Names inserted successfully into category table")
+
 
 def categories_show():
     """ Showing categories from DB to console """
