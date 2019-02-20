@@ -3,22 +3,23 @@ import mysql
 
 
 def categories_to_database(category_name):
-    """ Connection to the database and put categories in categories table """
+    """ Puts categories in categories table """
 
-    connection = mysql.connector.connect(user="root", password="458127",
+    cnx = mysql.connector.connect(user="root", password="458127",
                                             host="localhost", database="purbeurre",
                                             auth_plugin='caching_sha2_password')
 
-    cursor = connection.cursor()
-    query = "INSERT INTO category(nom) VALUES (%s)"
-    cursor.execute(query, category_name)
-    #cursor.execute("INSERT INTO category (nom) VALUES ('test')")
-    connection.commit()
-    print("Names inserted successfully into category table")
-    cursor.close()
-    connection.close()
+    cursor = cnx.cursor()
 
-    """except mysql.connector.Error as error:
+    for element in category_name:
+        query = "INSERT INTO category(nom) VALUES (%s)"
+        cursor.execute(query, element)
+
+        cnx.commit()
+
+    print("Names inserted successfully into category table")
+
+    """except mysql.connector.Error:
         connection.rollback()
         print("Failed to insert record")
 
@@ -28,6 +29,22 @@ def categories_to_database(category_name):
             connection.close()
             print("MySQL connection is closed")"""
 
+
+def products_to_database(category):
+    """ Puts products into the catabase """
+    cnx = mysql.connector.connect(user="root", password="458127",
+                                            host="localhost", database="purbeurre",
+                                            auth_plugin='caching_sha2_password')
+
+    cursor = cnx.cursor()
+
+    for element in category_name:
+        query = "INSERT INTO category(nom) VALUES (%s)"
+        cursor.execute(query, element)
+
+        cnx.commit()
+
+    print("Names inserted successfully into category table")
 
 def categories_show():
     """ Showing categories from DB to console """
@@ -44,4 +61,3 @@ def categories_show():
     for x in my_results:
         print(x)
 
-categories_show()

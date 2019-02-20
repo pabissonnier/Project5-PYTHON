@@ -7,7 +7,9 @@ def main():
     """Main function"""
 
     # Categories put into the database
-    datas_manager.categories_extract()
+    datas_extraction = datas_manager.categories_extract()
+    list_tuples = datas_manager.convert_list_tuples(datas_extraction)
+    database_manager.categories_to_database(list_tuples)
 
     continue_app = True
 
