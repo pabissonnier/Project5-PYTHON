@@ -38,11 +38,17 @@ def products_extract(category_name_url):
     products_read = products_json.read()
     products_data = json.loads(products_read.decode("utf-8"))
 
-    products_list = {}
+    key_list = ["product_name", "ingredients_text", "url", "categories" \
+                , "stores_tags" , "nutrition_grades"]
+    products_list = []
     for content in products_data["products"]:
+        products_list_2 = []
         for key, value in content.items():
-            if key == "product_name":
-                products_list.append(value)
+            if key in key_list:
+                products_list_2.append(value)
+                products_list.append(products_list_2)
+            elif key not in key_list:
+                pass
     print(products_list)
 
 
