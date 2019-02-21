@@ -33,17 +33,17 @@ def category_to_url(category_name):
 
 def products_extract(category_name_url):
     """ Extracting JSON products values and converting into list """
-    category_url = "https://fr.openfoodfacts.org/categories/{0}.json".format(category_name_url)
+    category_url = "https://fr.openfoodfacts.org/categorie/{0}.json".format(category_name_url)
     products_json = urllib.request.urlopen(category_url)
     products_read = products_json.read()
-    #products_data = json.loads(products_read.decode("utf-8"))
+    products_data = json.loads(products_read.decode("utf-8"))
 
-    categories_list = []
-    for value in categories_data["tags"]:
-        if value["products"] >= 4017:
-            categories_values = value["name"]
-            categories_list.append(categories_values)
-    return categories_list
+    products_list = {}
+    for content in products_data["products"]:
+        for key, value in content.items():
+            if key == "product_name":
+                products_list.append(value)
+    print(products_list)
 
 
 def convert_list_tuples(list_name):
@@ -54,4 +54,6 @@ def convert_list_tuples(list_name):
     return tuples_list
 
 
-products_extract("pommes-a-l-huile")
+test = category_to_url("Aliments et boissons à base de végétaux")
+print(test)
+products_extract(test)
