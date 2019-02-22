@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="22ff3723-919d-4d55-b70d-fd201dde91c6" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/database_manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/database_manager.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/datas_manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/datas_manager.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -40,32 +42,37 @@
         <counts>
           <entry key="dummy" value="23" />
           <entry key="gitignore" value="5" />
-          <entry key="py" value="7104" />
+          <entry key="py" value="8313" />
           <entry key="txt" value="42" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="PLAIN_TEXT" value="70" />
-          <entry key="Python" value="7104" />
+          <entry key="Python" value="8313" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main.py">
-          <provider selected="true" editor-type-id="text-editor" />
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="288">
+              <caret line="35" column="20" selection-start-line="35" selection-start-column="20" selection-end-line="35" selection-end-column="20" />
+            </state>
+          </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/datas_manager.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="178">
-              <caret line="52" column="51" selection-start-line="52" selection-start-column="51" selection-end-line="52" selection-end-column="51" />
+            <state relative-caret-position="-18">
+              <caret line="53" column="50" lean-forward="true" selection-start-line="53" selection-start-column="50" selection-end-line="53" selection-end-column="50" />
               <folding>
                 <element signature="e#23#44#0" expanded="true" />
+                <marker date="1550844544529" expanded="true" signature="2388:2391" ph="..." />
               </folding>
             </state>
           </provider>
@@ -74,12 +81,12 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/database_manager.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="47" column="109" selection-start-line="47" selection-start-column="109" selection-end-line="47" selection-end-column="109" />
+            <state relative-caret-position="-20">
+              <caret line="42" lean-forward="true" selection-start-line="42" selection-end-line="42" />
               <folding>
                 <element signature="e#0#22#0" expanded="true" />
-                <marker date="1550828731695" expanded="true" signature="67:107" ph="..." />
-                <marker date="1550828731695" expanded="true" signature="984:1711" ph="..." />
+                <marker date="1550846440726" expanded="true" signature="68:117" ph="..." />
+                <marker date="1550846440726" expanded="true" signature="724:1410" ph="..." />
               </folding>
             </state>
           </provider>
@@ -121,9 +128,9 @@
       <list>
         <option value="$PROJECT_DIR$/requirements.txt" />
         <option value="$PROJECT_DIR$/.gitignore" />
-        <option value="$PROJECT_DIR$/main.py" />
-        <option value="$PROJECT_DIR$/database_manager.py" />
         <option value="$PROJECT_DIR$/datas_manager.py" />
+        <option value="$PROJECT_DIR$/database_manager.py" />
+        <option value="$PROJECT_DIR$/main.py" />
       </list>
     </option>
   </component>
@@ -173,7 +180,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.datas_manager">
+  <component name="RunManager" selected="Python.main">
     <configuration name="database_manager" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="Projet 5" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -244,8 +251,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.datas_manager" />
         <item itemvalue="Python.database_manager" />
+        <item itemvalue="Python.datas_manager" />
       </list>
     </recent_temporary>
   </component>
@@ -254,6 +261,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="1912" y="-8" width="1382" height="744" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24597365" />
       <window_info id="Structure" order="1" weight="0.25" />
@@ -276,9 +284,6 @@
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/categories.py" />
-    <entry file="file://$PROJECT_DIR$/main.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/requirements.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="36">
@@ -293,25 +298,33 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/database_manager.py">
+    <entry file="file://$PROJECT_DIR$/datas_manager.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="47" column="109" selection-start-line="47" selection-start-column="109" selection-end-line="47" selection-end-column="109" />
+        <state relative-caret-position="-18">
+          <caret line="53" column="50" lean-forward="true" selection-start-line="53" selection-start-column="50" selection-end-line="53" selection-end-column="50" />
           <folding>
-            <element signature="e#0#22#0" expanded="true" />
-            <marker date="1550828731695" expanded="true" signature="67:107" ph="..." />
-            <marker date="1550828731695" expanded="true" signature="984:1711" ph="..." />
+            <element signature="e#23#44#0" expanded="true" />
+            <marker date="1550844544529" expanded="true" signature="2388:2391" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/datas_manager.py">
+    <entry file="file://$PROJECT_DIR$/database_manager.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="178">
-          <caret line="52" column="51" selection-start-line="52" selection-start-column="51" selection-end-line="52" selection-end-column="51" />
+        <state relative-caret-position="-20">
+          <caret line="42" lean-forward="true" selection-start-line="42" selection-end-line="42" />
           <folding>
-            <element signature="e#23#44#0" expanded="true" />
+            <element signature="e#0#22#0" expanded="true" />
+            <marker date="1550846440726" expanded="true" signature="68:117" ph="..." />
+            <marker date="1550846440726" expanded="true" signature="724:1410" ph="..." />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="288">
+          <caret line="35" column="20" selection-start-line="35" selection-start-column="20" selection-end-line="35" selection-end-column="20" />
         </state>
       </provider>
     </entry>

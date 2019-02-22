@@ -7,34 +7,37 @@ def main():
     """Main function"""
 
     # Categories put into the database
-    datas_extraction = datas_manager.categories_extract()
+    """datas_extraction = datas_manager.categories_extract()
     list_tuples = datas_manager.convert_list_tuples(datas_extraction)
-    database_manager.categories_to_database(list_tuples)
+    database_manager.categories_to_database(list_tuples)"""
+
+    # Products put into the database NE MARCHE PAS
+    """test = datas_manager.category_to_url("Aliments et boissons à base de végétaux")
+    products_extraction = datas_manager.products_extract("Aliments et boissons à base de végétaux", test)
+    database_manager.products_to_database(products_extraction)""" # Problème au niveau des colonnes
 
     continue_app = True
 
     while continue_app is True:
         """Application loop"""
 
+        # ACCUEIL
         print(
             "Bienvenue sur l'application Pur BEURRE !\n"
             "Choisissez un produit que vous souhaitez remplacer par un substitut plus sain...\n ")
-        question_1_over = 0
-        while question_1_over == 0:
-            category_choice = input("A quelle catégorie appartient votre produit ? insérez le numéro :")
-            try:
-                category_choice = int(category_choice)
-            except ValueError:
-                print("Insérez un chiffre")
-            if type(category_choice) is int:
-                question_1_over = 1
 
-        question_2 = True
-        while question_2 is True:
-            # Choice of the product
-            product_choice = input("Quel est votre produit ? insérez le numéro :")
-            # vérifier si la variable est bien un int
-            # si le produit correspond à celles affichées on sort de la boucle
+        # QUESTION 1
+
+        # Affichage liste categories
+
+        category_choice = input("A quelle catégorie appartient votre produit ? insérez le numéro :")
+
+
+        # QUESTION 2
+        # Choice of the product
+        product_choice = input("Quel est votre produit ? insérez le numéro :")
+        # vérifier si la variable est bien un int
+        # si le produit correspond à celles affichées on sort de la boucle
 
         question_3 = True
         while question_3 is True:

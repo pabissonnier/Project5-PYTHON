@@ -1,8 +1,10 @@
 import mysql.connector
 import mysql
 
+
 def connection_to_database ():
     """ Connection to the databse"""
+    pass
 
 
 def categories_to_database(category_name):
@@ -22,32 +24,22 @@ def categories_to_database(category_name):
 
     print("Names inserted successfully into category table")
 
-    """except mysql.connector.Error:
-        connection.rollback()
-        print("Failed to insert record")
-
-    finally:
-        if connection.is_connected():
-            cursor.close()
-            connection.close()
-            print("MySQL connection is closed")"""
-
 
 def products_to_database(category_list):
     """ Puts products into the catabase """
+
     cnx = mysql.connector.connect(user="root", password="458127",
                                             host="localhost", database="purbeurre",
                                             auth_plugin='caching_sha2_password')
 
     cursor = cnx.cursor()
 
-    for element in category_list:
-        for key, value in element:
-            query = "INSERT INTO category(name, nom_category, ingredients, shops, link, nutriscore ) " \
-                    "VALUES (%s,%s,%s,%s,%s,%s)"
-            cursor.execute(query, value = "name", value = "categories", value = "name", value = "categories",
+    for dict in category_list:
+        columns = ', '.join("'" + str(x).replace('/', '_') + "'" for x in dict.keys())
+        values = ', '.join("'" + str(x).replace('/', '_') + "'" for x in dict.values())
 
-            cnx.commit()
+        cursor.execute("INSERT INTO %s(%s) VALUES (%s);" % ('product', columns, values))
+        cnx.commit()
 
     print("Names inserted successfully into category table")
 
