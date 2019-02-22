@@ -65,10 +65,27 @@ def categories_show():
             cat_list2.append(cat_str)
             i += 1
         cat_list.append(cat_list2)
+        with open("")
 
     for cat_list2 in cat_list:
         print(cat_list2)
 
 
+def category_choice(category_number, category_list):
+    """ The user selects the category"""
 
+    connection = mysql.connector.connect(user="root", password="458127",
+                                            host="localhost", database="purbeurre",
+                                            auth_plugin='caching_sha2_password')
 
+    cursor = connection.cursor()
+
+    category_name = category_list[category_number]
+
+    print(category_name)
+
+    """query_number_in_db = "SELECT (%s) FROM 'category' WHERE 'nom_category' ==
+
+    query = "SELECT (%s) FROM 'product' WHERE 'nom_category' == """
+
+category_choice(1, categories_show())
