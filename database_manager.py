@@ -1,5 +1,6 @@
 import mysql.connector
 import mysql
+import pickle
 
 
 def connection_to_database ():
@@ -65,10 +66,11 @@ def categories_show():
             cat_list2.append(cat_str)
             i += 1
         cat_list.append(cat_list2)
-        with open("")
 
-    for cat_list2 in cat_list:
-        print(cat_list2)
+    """for cat_list2 in cat_list:
+        print(cat_list2)"""
+
+    return cat_list
 
 
 def category_choice(category_number, category_list):
@@ -80,12 +82,16 @@ def category_choice(category_number, category_list):
 
     cursor = connection.cursor()
 
-    category_name = category_list[category_number]
+    category_row = category_list[category_number-1]
 
-    print(category_name)
+    category_name = category_row[1]
 
-    """query_number_in_db = "SELECT (%s) FROM 'category' WHERE 'nom_category' ==
+    query_name_in_db = """SELECT "name" FROM 'product' WHERE 'nom_category' = %s"""
+    cursor.execute(query_name_in_db, category_name)
+    record = cursor.fetchall()
 
-    query = "SELECT (%s) FROM 'product' WHERE 'nom_category' == """
+    print(record)
 
-category_choice(1, categories_show())
+
+cat_list = categories_show()
+category_choice(1, cat_list)
