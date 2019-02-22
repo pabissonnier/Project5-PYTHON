@@ -52,10 +52,23 @@ def categories_show():
                                             auth_plugin='caching_sha2_password')
 
     cursor = connection.cursor()
-    cursor.execute("SELECT * FROM test")
+    cursor.execute("SELECT * FROM category")
 
     my_results = cursor.fetchall()
 
-    for x in my_results:
-        print(x)
+    i = 1
+    cat_list=[]
+    for cat_tuples in my_results:
+        for cat_str in cat_tuples:
+            cat_list2 = []
+            cat_list2.append(i)
+            cat_list2.append(cat_str)
+            i += 1
+        cat_list.append(cat_list2)
+
+    for cat_list2 in cat_list:
+        print(cat_list2)
+
+
+
 
