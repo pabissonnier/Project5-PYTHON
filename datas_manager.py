@@ -35,7 +35,7 @@ def products_extract(category_name_url):
     """ Extracting JSON products values and converting into list """
     i = 1
     products_list = []
-    while i <= 5:
+    while i <= 2:
         category_url = "https://fr.openfoodfacts.org/categorie/{0}/{1}.json".format(category_name_url, i)
         products_json = urllib.request.urlopen(category_url)
         products_read = products_json.read()
@@ -51,7 +51,7 @@ def products_extract(category_name_url):
                 elif key == "url":
                     products_dict["link"] = value
                 elif key == "categories":
-                    products_dict["categories"] = value
+                    products_dict["categories"] = value[:39]
                 elif key == "store_tags":
                     products_dict["stores"] = value
                 elif key == "nutrition_grades":
