@@ -43,8 +43,9 @@ def products_to_database(category_list):
 
     for element in category_list:
         for key, value in element:
-            query = "INSERT INTO category(name, ) VALUES (%s)"
-            cursor.execute(query, value)
+            query = "INSERT INTO category(name, nom_category, ingredients, shops, link, nutriscore ) " \
+                    "VALUES (%s,%s,%s,%s,%s,%s)"
+            cursor.execute(query, value = "name", value = "categories", value = "name", value = "categories",
 
             cnx.commit()
 

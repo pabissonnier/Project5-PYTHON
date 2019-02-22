@@ -31,7 +31,7 @@ def category_to_url(category_name):
     return category_name_url
 
 
-def products_extract(category_name_url):
+def products_extract(category_name, category_name_url):
     """ Extracting JSON products values and converting into list """
     i = 1
     products_list = []
@@ -50,12 +50,11 @@ def products_extract(category_name_url):
                     products_dict["ingredients"] = value
                 elif key == "url":
                     products_dict["link"] = value
-                elif key == "categories":
-                    products_dict["categories"] = value[:39]
                 elif key == "store_tags":
                     products_dict["stores"] = value
                 elif key == "nutrition_grades":
                     products_dict["nutriscore"] = value
+            products_dict["categories"] = category_name
             products_list.append(products_dict)
         i += 1
     print(products_list)
@@ -70,4 +69,4 @@ def convert_list_tuples(list_name):
 
 
 test = category_to_url("Aliments et boissons à base de végétaux")
-products_extract(test)
+products_extract("Aliments et boissons à base de végétaux", test)
