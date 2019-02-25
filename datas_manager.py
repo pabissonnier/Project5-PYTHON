@@ -67,4 +67,4 @@ def convert_list_tuples(list_name):
         tuples_list.append((x,))
     return tuples_list
 
-
+print(products_extract("Snacks", category_to_url("Snacks")))

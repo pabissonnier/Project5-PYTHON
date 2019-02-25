@@ -1,6 +1,5 @@
 import mysql.connector
 import mysql
-import pickle
 
 
 def connection_to_database ():
@@ -24,6 +23,21 @@ def categories_to_database(category_name):
         cnx.commit()
 
     print("Names inserted successfully into category table")
+
+
+def category_name_extract():
+    """ Takes category name from the database to use products url from the API """
+    cnx = mysql.connector.connect(user="root", password="458127",
+                                            host="localhost", database="purbeurre",
+                                            auth_plugin='caching_sha2_password')
+
+    cursor = cnx.cursor()
+
+    cursor.execute("SELECT * FROM category")
+    my_results = cursor.fetchall()
+    for element in my_results:
+        for product_name in element:
+            return product_name
 
 
 def products_to_database(category_list):
@@ -58,7 +72,7 @@ def categories_show():
     my_results = cursor.fetchall()
 
     i = 1
-    cat_list=[]
+    cat_list = []
     for cat_tuples in my_results:
         for cat_str in cat_tuples:
             cat_list2 = []
@@ -67,20 +81,18 @@ def categories_show():
             i += 1
         cat_list.append(cat_list2)
 
-    """for cat_list2 in cat_list:
-        print(cat_list2)"""
-
-    return cat_list
+    for cat_list2 in cat_list:
+        print(cat_list2)
 
 
 def category_choice(category_number, category_list):
-    """ The user selects the category"""
+    """The user selects the category"""
 
-    connection = mysql.connector.connect(user="root", password="458127",
+    cnx = mysql.connector.connect(user="root", password="458127",
                                             host="localhost", database="purbeurre",
                                             auth_plugin='caching_sha2_password')
 
-    cursor = connection.cursor()
+    cursor = cnx.cursor()
 
     category_row = category_list[category_number-1]
 
@@ -92,6 +104,4 @@ def category_choice(category_number, category_list):
 
     print(record)
 
-
-cat_list = categories_show()
-category_choice(1, cat_list)
+category_name_extract()

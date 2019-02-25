@@ -26,11 +26,11 @@ def main():
 
     # QUESTION 1
 
-    category_list = database_manager.categories_show()
+    categories_list = database_manager.categories_show()
 
     category_choice = input("\nA quelle catégorie appartient votre produit ? insérez le numéro :")
 
-    for element in category_list:
+    for element in categories_list:
         for key, value in element:
             if category_choice == key:
                 print(value)
