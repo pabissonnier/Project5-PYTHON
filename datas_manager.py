@@ -19,10 +19,11 @@ def categories_extract():
     return categories_list
 
 
-def category_to_url(categories_list):
+def category_to_url(categories_name_list):
     """ Converting category name to url """
-    category_url_list = []
-    for category_name in categories_list:
+    category_name_url_list = []
+    for category_name in categories_name_list:
+        category_url_dict = {}
         category_name_url = category_name.lower()
         category_name_url = category_name_url.replace(' ', '-')
         category_name_url = category_name_url.replace('é', 'e')
@@ -31,39 +32,40 @@ def category_to_url(categories_list):
         category_name_url = category_name_url.replace('ç', 'c')
         category_name_url = category_name_url.replace('ù', 'u')
         category_name_url = category_name_url.replace("'", '-')
-        category_url_list.append(category_name_url)
-    return category_url_list
+        category_url_dict[category_name] = category_name_url
+        category_name_url_list.append(category_url_dict)
+    return category_name_url_list
 
 
-def products_extract(category_name, category_name_url):
+def products_extract(category_name_url_list):
     """ Extracting JSON products values and converting into list """
-    i = 1
-    products_list = []
-    while i <= 5:
-        category_url = "https://fr.openfoodfacts.org/categorie/{0}/{1}.json".format(category_name_url, i)
-        return category_url
+    for element in category_name_url_list:
+        for key_list, value_list in element:
+            while i <= 2:
+                category_url = "https://fr.openfoodfacts.org/categorie/{0}/{1}.json".format(value_list, i)
+                return category_url
+                products_json = urllib.request.urlopen(category_url)
+                products_read = products_json.read()
+                products_data = json.loads(products_read.decode("utf-8"))
 
-        """products_json = urllib.request.urlopen(category_url)
-        products_read = products_json.read()
-        products_data = json.loads(products_read.decode("utf-8"))
-
-        for content in products_data["products"]:
-            products_dict = {}
-            for key, value in content.items():
-                products_dict["nom_category"] = category_name
-                if key == "product_name":
-                    products_dict["name"] = value
-                elif key == "url":
-                    products_dict["link"] = value
-                elif key == "stores_tags":
-                    products_dict["shops"] = value
-                elif key == "ingredients_text_fr":
-                    products_dict["ingredients"] = value
-                elif key == "nutrition_grades":
-                    products_dict["nutriscore"] = value
-            products_list.append(products_dict)
-        i += 1
-    return products_list"""
+                for content in products_data["products"]:
+                    products_dict = {}
+                    for key, value in content.items():
+                        products_dict["nom_category"] = key_list
+                        if key == "product_name":
+                            products_dict["name"] = value
+                        elif key == "url":
+                            products_dict["link"] = value
+                        elif key == "stores_tags":
+                            products_dict["shops"] = value
+                        elif key == "ingredients_text_fr":
+                            products_dict["ingredients"] = value
+                        elif key == "nutrition_grades":
+                            products_dict["nutriscore"] = value
+                    products_in_category_list.append(products_dict)
+                i += 1
+            products_list.append(products_in_category_list)
+    return products_list
 
 
 def convert_list_tuples(list_name):
