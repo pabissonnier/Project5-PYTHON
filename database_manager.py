@@ -2,106 +2,93 @@ import mysql.connector
 import mysql
 
 
-def connection_to_database ():
-    """ Connection to the databse"""
-    pass
+class DatabaseManager:
+    """ Class for the management of the database and its datas """
+    def __init__(self, table):
+        self.table = table
 
+    def connection_to_database(self):
+        """ Connection to the databse"""
+        cnx = mysql.connector.connect(user="root", password="458127",
+                                                host="localhost", database="purbeurre",
+                                                auth_plugin='caching_sha2_password')
 
-def categories_to_database(category_name):
-    """ Puts categories in categories table """
+        cursor = cnx.cursor()
+        return cursor
 
-    cnx = mysql.connector.connect(user="root", password="458127",
-                                            host="localhost", database="purbeurre",
-                                            auth_plugin='caching_sha2_password')
+    def categories_to_database(self, category_name):
+        """ Puts categories in categories table """
 
-    cursor = cnx.cursor()
+        cursor = DatabaseManager.connection_to_database(self)
 
-    for element in category_name:
-        query = "INSERT INTO category(name) VALUES (%s)"
-        cursor.execute(query, element)
+        for element in category_name:
+            query = "INSERT INTO category(name) VALUES (%s)"
+            cursor.execute(query, element)
 
-        cnx.commit()
+            cursor.cnx.commit()
 
-    print("Names inserted successfully into category table")
+        print("Names inserted successfully into category table")
 
+    def category_name_extract(self):
+        """ Takes category name from the database to use products url from the API """
 
-def category_name_extract():
-    """ Takes category name from the database to use products url from the API """
-    cnx = mysql.connector.connect(user="root", password="458127",
-                                            host="localhost", database="purbeurre",
-                                            auth_plugin='caching_sha2_password')
+        cursor = DatabaseManager.connection_to_database(self)
 
-    cursor = cnx.cursor()
+        categories_list = []
+        cursor.execute("SELECT * FROM category")
+        my_results = cursor.fetchall()
+        for element in my_results:
+            for product_name in element:
+                categories_list.append(product_name)
+        return categories_list
 
-    categories_list = []
-    cursor.execute("SELECT * FROM category")
-    my_results = cursor.fetchall()
-    for element in my_results:
-        for product_name in element:
-            categories_list.append(product_name)
-    return categories_list
+    def products_to_database(self, category_list):
+        """ Puts products into the catabase """
 
+        cursor = DatabaseManager.connection_to_database(self)
 
-def products_to_database(category_list):
-    """ Puts products into the catabase """
+        for dict in category_list:
+            columns = ', '.join("'" + str(x).replace('/', '_') + "'" for x in dict.keys())
+            values = ', '.join("'" + str(x).replace('/', '_') + "'" for x in dict.values())
 
-    cnx = mysql.connector.connect(user="root", password="458127",
-                                            host="localhost", database="purbeurre",
-                                            auth_plugin='caching_sha2_password')
+            cursor.execute("INSERT INTO %s(%s) VALUES (%s);" % ('product', columns, values))
+            cursor.cnx.commit()
 
-    cursor = cnx.cursor()
+        print("Names inserted successfully into category table")
 
-    for dict in category_list:
-        columns = ', '.join("'" + str(x).replace('/', '_') + "'" for x in dict.keys())
-        values = ', '.join("'" + str(x).replace('/', '_') + "'" for x in dict.values())
+    def categories_show(self):
+        """ Showing categories from DB to console """
 
-        cursor.execute("INSERT INTO %s(%s) VALUES (%s);" % ('product', columns, values))
-        cnx.commit()
+        cursor = DatabaseManager.connection_to_database(self)
 
-    print("Names inserted successfully into category table")
+        cursor.execute("SELECT * FROM category")
 
+        my_results = cursor.fetchall()
 
-def categories_show():
-    """ Showing categories from DB to console """
+        i = 1
+        cat_list = []
+        for cat_tuples in my_results:
+            for cat_str in cat_tuples:
+                cat_list2 = []
+                cat_list2.append(i)
+                cat_list2.append(cat_str)
+                i += 1
+            cat_list.append(cat_list2)
 
-    connection = mysql.connector.connect(user="root", password="458127",
-                                            host="localhost", database="purbeurre",
-                                            auth_plugin='caching_sha2_password')
+        for cat_list2 in cat_list:
+            print(cat_list2)
 
-    cursor = connection.cursor()
-    cursor.execute("SELECT * FROM category")
+    def category_choice(self, category_number, category_list):
+        """The user selects the category"""
 
-    my_results = cursor.fetchall()
+        cursor = DatabaseManager.connection_to_database(self)
 
-    i = 1
-    cat_list = []
-    for cat_tuples in my_results:
-        for cat_str in cat_tuples:
-            cat_list2 = []
-            cat_list2.append(i)
-            cat_list2.append(cat_str)
-            i += 1
-        cat_list.append(cat_list2)
+        category_row = category_list[category_number-1]
 
-    for cat_list2 in cat_list:
-        print(cat_list2)
+        category_name = category_row[1]
 
+        query_name_in_db = """SELECT "name" FROM 'product' WHERE 'nom_category' = %s"""
+        cursor.execute(query_name_in_db, category_name)
+        record = cursor.fetchall()
 
-def category_choice(category_number, category_list):
-    """The user selects the category"""
-
-    cnx = mysql.connector.connect(user="root", password="458127",
-                                            host="localhost", database="purbeurre",
-                                            auth_plugin='caching_sha2_password')
-
-    cursor = cnx.cursor()
-
-    category_row = category_list[category_number-1]
-
-    category_name = category_row[1]
-
-    query_name_in_db = """SELECT "name" FROM 'product' WHERE 'nom_category' = %s"""
-    cursor.execute(query_name_in_db, category_name)
-    record = cursor.fetchall()
-
-    print(record)
+        print(record)

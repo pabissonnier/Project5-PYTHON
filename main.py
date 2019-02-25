@@ -1,10 +1,13 @@
 # -*- coding: utf-8 -*
-import datas_manager
-import database_manager
+from datas_manager import DatasManager
+from database_manager import DatabaseManager
 
 
 def main():
     """Main function"""
+
+    # Creation of the instances
+    categories = DatasManager('https://fr.openfoodfacts.org/categories.json')
 
     # Categories put into the database
     """datas_extraction = datas_manager.categories_extract()
