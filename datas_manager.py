@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*
 import urllib.request
 import json
+import database_manager
 
 
 def categories_extract():
@@ -18,17 +19,20 @@ def categories_extract():
     return categories_list
 
 
-def category_to_url(category_name):
+def category_to_url(categories_list):
     """ Converting category name to url """
-    category_name_url = category_name.lower()
-    category_name_url = category_name_url.replace(' ', '-')
-    category_name_url = category_name_url.replace('é', 'e')
-    category_name_url = category_name_url.replace('è', 'e')
-    category_name_url = category_name_url.replace('à', 'a')
-    category_name_url = category_name_url.replace('ç', 'c')
-    category_name_url = category_name_url.replace('ù', 'u')
-    category_name_url = category_name_url.replace("'", '-')
-    return category_name_url
+    category_url_list = []
+    for category_name in categories_list:
+        category_name_url = category_name.lower()
+        category_name_url = category_name_url.replace(' ', '-')
+        category_name_url = category_name_url.replace('é', 'e')
+        category_name_url = category_name_url.replace('è', 'e')
+        category_name_url = category_name_url.replace('à', 'a')
+        category_name_url = category_name_url.replace('ç', 'c')
+        category_name_url = category_name_url.replace('ù', 'u')
+        category_name_url = category_name_url.replace("'", '-')
+        category_url_list.append(category_name_url)
+    return category_url_list
 
 
 def products_extract(category_name, category_name_url):
@@ -37,7 +41,9 @@ def products_extract(category_name, category_name_url):
     products_list = []
     while i <= 5:
         category_url = "https://fr.openfoodfacts.org/categorie/{0}/{1}.json".format(category_name_url, i)
-        products_json = urllib.request.urlopen(category_url)
+        return category_url
+
+        """products_json = urllib.request.urlopen(category_url)
         products_read = products_json.read()
         products_data = json.loads(products_read.decode("utf-8"))
 
@@ -57,7 +63,7 @@ def products_extract(category_name, category_name_url):
                     products_dict["nutriscore"] = value
             products_list.append(products_dict)
         i += 1
-    return products_list
+    return products_list"""
 
 
 def convert_list_tuples(list_name):
@@ -67,4 +73,8 @@ def convert_list_tuples(list_name):
         tuples_list.append((x,))
     return tuples_list
 
-print(products_extract("Snacks", category_to_url("Snacks")))
+
+categories_names = database_manager.category_name_extract()
+categories_names_url = category_to_url(categories_names)
+#product_url = products_extract(categories_names, categories_names_url)
+print(categories_names_url)

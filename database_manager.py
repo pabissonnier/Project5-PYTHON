@@ -33,11 +33,13 @@ def category_name_extract():
 
     cursor = cnx.cursor()
 
+    categories_list = []
     cursor.execute("SELECT * FROM category")
     my_results = cursor.fetchall()
     for element in my_results:
         for product_name in element:
-            return product_name
+            categories_list.append(product_name)
+    return categories_list
 
 
 def products_to_database(category_list):
@@ -103,5 +105,3 @@ def category_choice(category_number, category_list):
     record = cursor.fetchall()
 
     print(record)
-
-category_name_extract()
