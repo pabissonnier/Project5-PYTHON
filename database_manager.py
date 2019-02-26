@@ -42,19 +42,24 @@ class DatabaseManager:
                 categories_list.append(product_name)
         return categories_list
 
-    def products_to_database(self, category_list):
-        """ Puts products into the catabase """
+    def products_to_database(self, products_lists):
+        """ Puts products into the database """
 
         cursor = DatabaseManager.connection_to_database(self)
 
-        for dict in category_list:
-            columns = ', '.join("'" + str(x).replace('/', '_') + "'" for x in dict.keys())
-            values = ', '.join("'" + str(x).replace('/', '_') + "'" for x in dict.values())
+        for category_products_list in products_lists:
+            for products_dicts in category_products_list:
+                for key, value in products_dicts:
+                    qmarks = ', '.join('?' * len(products_dicts))
+                    query = "INSERT INTO product (%s) VALUES (%s)" % (qmarks, qmarks)
+                    cursor.execute(query, key, value)
+                    """columns = ', '.join("'" + str(x).replace('/', '_') + "'" for x in products_dicts.keys())
+                    values = ', '.join("'" + str(x).replace('/', '_') + "'" for x in products_dicts.values())
+    
+                    cursor.execute("INSERT INTO product (%s*) VALUES (%s*);" % (columns, values))"""
+                    cnx.commit()
 
-            cursor.execute("INSERT INTO %s(%s) VALUES (%s);" % ('product', columns, values))
-            cursor.cnx.commit()
-
-        print("Names inserted successfully into category table")
+        print("Names inserted successfully into product table")
 
     def categories_show(self):
         """ Showing categories from DB to console """

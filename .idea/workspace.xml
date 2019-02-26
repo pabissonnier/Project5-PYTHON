@@ -3,9 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="22ff3723-919d-4d55-b70d-fd201dde91c6" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/database_manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/database_manager.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/datas_manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/datas_manager.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/initialization_database.py" beforeDir="false" afterPath="$PROJECT_DIR$/initialization_database.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -43,14 +41,14 @@
         <counts>
           <entry key="dummy" value="23" />
           <entry key="gitignore" value="5" />
-          <entry key="py" value="15638" />
+          <entry key="py" value="16291" />
           <entry key="txt" value="42" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="PLAIN_TEXT" value="70" />
-          <entry key="Python" value="15638" />
+          <entry key="Python" value="16291" />
         </counts>
       </usages-collector>
     </session>
@@ -72,8 +70,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/initialization_database.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="324">
-              <caret line="27" selection-start-line="27" selection-end-line="27" />
+            <state relative-caret-position="288">
+              <caret line="28" column="1" selection-start-line="28" selection-start-column="1" selection-end-line="28" selection-end-column="1" />
               <folding>
                 <element signature="e#23#61#0" expanded="true" />
               </folding>
@@ -81,11 +79,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/datas_manager.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="161">
-              <caret line="57" column="1" selection-start-line="57" selection-start-column="1" selection-end-line="57" selection-end-column="1" />
+            <state relative-caret-position="179">
+              <caret line="28" column="24" lean-forward="true" selection-start-line="28" selection-start-column="24" selection-end-line="28" selection-end-column="24" />
               <folding>
                 <element signature="e#25#46#0" expanded="true" />
                 <marker date="1551176589580" expanded="true" signature="125:214" ph="..." />
@@ -98,20 +96,20 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/database_manager.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="144">
-              <caret line="47" column="61" lean-forward="true" selection-start-line="47" selection-start-column="61" selection-end-line="47" selection-end-column="61" />
+            <state relative-caret-position="192">
+              <caret line="54" column="52" selection-start-line="54" selection-start-column="52" selection-end-line="54" selection-end-column="52" />
               <folding>
                 <element signature="e#0#22#0" expanded="true" />
-                <marker date="1551169898421" expanded="true" signature="318:424" ph="..." />
-                <marker date="1551169898421" expanded="true" signature="461:560" ph="..." />
-                <marker date="1551169898421" expanded="true" signature="608:617" ph="..." />
-                <marker date="1551169898421" expanded="true" signature="992:1422" ph="..." />
-                <marker date="1551169898421" expanded="true" signature="1472:1481" ph="..." />
-                <marker date="1551169898421" expanded="true" signature="1472:1996" ph="..." />
-                <marker date="1551169898421" expanded="true" signature="2622:3027" ph="..." />
+                <marker date="1551188192266" expanded="true" signature="318:424" ph="..." />
+                <marker date="1551188192266" expanded="true" signature="461:560" ph="..." />
+                <marker date="1551188192266" expanded="true" signature="608:617" ph="..." />
+                <marker date="1551188192266" expanded="true" signature="992:1422" ph="..." />
+                <marker date="1551188192266" expanded="true" signature="1473:1482" ph="..." />
+                <marker date="1551188192266" expanded="true" signature="1473:2381" ph="..." />
+                <marker date="1551188192266" expanded="true" signature="3007:3412" ph="..." />
               </folding>
             </state>
           </provider>
@@ -156,10 +154,10 @@
       <list>
         <option value="$PROJECT_DIR$/requirements.txt" />
         <option value="$PROJECT_DIR$/.gitignore" />
-        <option value="$PROJECT_DIR$/database_manager.py" />
         <option value="$PROJECT_DIR$/main.py" />
-        <option value="$PROJECT_DIR$/initialization_database.py" />
         <option value="$PROJECT_DIR$/datas_manager.py" />
+        <option value="$PROJECT_DIR$/database_manager.py" />
+        <option value="$PROJECT_DIR$/initialization_database.py" />
       </list>
     </option>
   </component>
@@ -308,6 +306,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="1912" y="-8" width="1382" height="744" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24597365" />
       <window_info id="Structure" order="1" weight="0.25" />
@@ -360,27 +359,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/database_manager.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="144">
-          <caret line="47" column="61" lean-forward="true" selection-start-line="47" selection-start-column="61" selection-end-line="47" selection-end-column="61" />
-          <folding>
-            <element signature="e#0#22#0" expanded="true" />
-            <marker date="1551169898421" expanded="true" signature="318:424" ph="..." />
-            <marker date="1551169898421" expanded="true" signature="461:560" ph="..." />
-            <marker date="1551169898421" expanded="true" signature="608:617" ph="..." />
-            <marker date="1551169898421" expanded="true" signature="992:1422" ph="..." />
-            <marker date="1551169898421" expanded="true" signature="1472:1481" ph="..." />
-            <marker date="1551169898421" expanded="true" signature="1472:1996" ph="..." />
-            <marker date="1551169898421" expanded="true" signature="2622:3027" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/initialization_database.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="324">
-          <caret line="27" selection-start-line="27" selection-end-line="27" />
+        <state relative-caret-position="288">
+          <caret line="28" column="1" selection-start-line="28" selection-start-column="1" selection-end-line="28" selection-end-column="1" />
           <folding>
             <element signature="e#23#61#0" expanded="true" />
           </folding>
@@ -389,8 +371,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/datas_manager.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="161">
-          <caret line="57" column="1" selection-start-line="57" selection-start-column="1" selection-end-line="57" selection-end-column="1" />
+        <state relative-caret-position="179">
+          <caret line="28" column="24" lean-forward="true" selection-start-line="28" selection-start-column="24" selection-end-line="28" selection-end-column="24" />
           <folding>
             <element signature="e#25#46#0" expanded="true" />
             <marker date="1551176589580" expanded="true" signature="125:214" ph="..." />
@@ -398,6 +380,23 @@
             <marker date="1551176589580" expanded="true" signature="843:844" ph="..." />
             <marker date="1551176589580" expanded="true" signature="843:848" ph="..." />
             <marker date="1551176589580" expanded="true" signature="1003:1014" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database_manager.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="192">
+          <caret line="54" column="52" selection-start-line="54" selection-start-column="52" selection-end-line="54" selection-end-column="52" />
+          <folding>
+            <element signature="e#0#22#0" expanded="true" />
+            <marker date="1551188192266" expanded="true" signature="318:424" ph="..." />
+            <marker date="1551188192266" expanded="true" signature="461:560" ph="..." />
+            <marker date="1551188192266" expanded="true" signature="608:617" ph="..." />
+            <marker date="1551188192266" expanded="true" signature="992:1422" ph="..." />
+            <marker date="1551188192266" expanded="true" signature="1473:1482" ph="..." />
+            <marker date="1551188192266" expanded="true" signature="1473:2381" ph="..." />
+            <marker date="1551188192266" expanded="true" signature="3007:3412" ph="..." />
           </folding>
         </state>
       </provider>
