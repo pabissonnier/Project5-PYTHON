@@ -17,12 +17,9 @@ def main():
     categories_list = DatabaseManager.categories_show(initialization_database.category_table)
     print(categories_list)
 
-    """category_choice = input("\nA quelle catégorie appartient votre produit ? insérez le numéro :")
+    category_choice = input("\nA quelle catégorie appartient votre produit ? insérez le numéro :")
 
-    for element in categories_list:
-        for key, value in element:
-            if category_choice == key:
-                print(value)"""
+
 
 
 if __name__ == "__main__":

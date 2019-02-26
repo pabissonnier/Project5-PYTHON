@@ -86,9 +86,11 @@ class DatabaseManager:
 
         my_results = cursor.fetchall()
 
+        categories_list = []
         for cat_tuples in my_results:
             for value in cat_tuples:
-                return value
+                categories_list.append(value)
+        return categories_list
 
     def category_choice(self, category_number, category_list):
         """The user selects the category"""
