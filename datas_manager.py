@@ -7,10 +7,10 @@ from database_manager import DatabaseManager
 
 class DatasManager:
     """ Class for the management of the datas """
-    def __init__(self, name):
-        self.name = name
+    def __init__(self):
+        pass
 
-    def categories_extract(self, url):
+    def categories_extract(self):
         """ Extracting JSON categories values and converting into list """
 
         categories_json = urllib.request.urlopen('https://fr.openfoodfacts.org/categories.json')
@@ -23,6 +23,13 @@ class DatasManager:
                 categories_values = value["name"]
                 categories_list.append(categories_values)
         return categories_list
+
+    def convert_list_tuples(self, list_name):
+        """ Convert list into list of tuples"""
+        tuples_list = []
+        for x in list_name:
+            tuples_list.append((x,))
+        return tuples_list
 
     def category_to_url(self, categories_name_list):
         """ Converting category name to url """
@@ -42,7 +49,7 @@ class DatasManager:
         return category_name_url_list
 
     def products_extract(self, category_name_url_list):
-        """ Extracting JSON products values and converting into list """
+        """Extracting JSON products values and converting into list"""
         products_in_category_list = []
         for element in category_name_url_list:
             for key_list, value_list in element.items():
@@ -73,7 +80,3 @@ class DatasManager:
 
 
 
-categories_names = DatabaseManager.category_name_extract()
-categories_names_url = DatasManager.category_to_url(categories_names)
-products_list = DatasManager.products_extract(categories_names_url)
-print(products_list)

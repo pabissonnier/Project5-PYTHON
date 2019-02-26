@@ -1,31 +1,31 @@
 import mysql.connector
 import mysql
 
-
-class DatabaseManager:
-    """ Class for the management of the database and its datas """
-    def __init__(self, table):
-        self.table = table
-
-    def connection_to_database(self):
-        """ Connection to the databse"""
-        cnx = mysql.connector.connect(user="root", password="458127",
+# Database connection
+cnx = mysql.connector.connect(user="root", password="458127",
                                                 host="localhost", database="purbeurre",
                                                 auth_plugin='caching_sha2_password')
 
+
+class DatabaseManager:
+    """ Class for the management of the database and its datas """
+    def __init__(self):
+        pass
+
+    def connection_to_database(self):
+        """ Connection to the databse"""
         cursor = cnx.cursor()
         return cursor
 
-    def categories_to_database(self, category_name):
+    def categories_to_database(self, category_list):
         """ Puts categories in categories table """
-
         cursor = DatabaseManager.connection_to_database(self)
 
-        for element in category_name:
-            query = "INSERT INTO category(name) VALUES (%s)"
+        for element in category_list:
+            query = "INSERT INTO category (name) VALUES (%s)"
             cursor.execute(query, element)
 
-            cursor.cnx.commit()
+        cnx.commit()
 
         print("Names inserted successfully into category table")
 
@@ -77,6 +77,18 @@ class DatabaseManager:
 
         for cat_list2 in cat_list:
             print(cat_list2)
+
+    def category_from_database(self):
+        """ Extract categories from database to get products """
+        cursor = DatabaseManager.connection_to_database(self)
+
+        cursor.execute("SELECT * FROM category")
+
+        my_results = cursor.fetchall()
+
+        for cat_tuples in my_results:
+            for value in cat_tuples:
+                return value
 
     def category_choice(self, category_number, category_list):
         """The user selects the category"""
