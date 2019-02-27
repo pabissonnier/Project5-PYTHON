@@ -50,17 +50,6 @@ class DatabaseManager:
 
         for category_products_list in products_lists:
             for products_dicts in category_products_list:
-                """placeholders = ', '.join(['?'] * len(products_dicts.values()))
-                columns = ', '.join(products_dicts.keys())
-                query = "INSERT INTO product (%s) VALUES (%s)" % (columns, placeholders)
-                cursor.execute(query, products_dicts.keys(), products_dicts.values())
-                cnx.commit()"""
-
-                """placeholder = ', '.join(["%s"] * len(products_dicts))
-                query = "INSERT INTO product ({columns}) VALUES ({values});".format(columns=",".join(products_dicts.keys()), values = placeholder)
-                cursor.execute(query, list(products_dicts.values()))
-                cnx.commit()"""
-
                 cursor.execute("INSERT INTO product (name, nom_category, ingredients, shops, "
                                "link, nutriscore) VALUES (%(name)s, %(nom_category)s, %(ingredients)s, "
                                "%(shops)s, %(link)s, %(nutriscore)s)", products_dicts)
@@ -118,3 +107,6 @@ class DatabaseManager:
         record = cursor.fetchall()
 
         print(record)
+
+    def products_show(self, category_number, category_name):
+        """ Show the products after the category choice """
