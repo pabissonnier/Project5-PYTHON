@@ -76,8 +76,8 @@ class DatasManager:
                     products_dict["name"] = value
                 elif key == "url":
                     products_dict["link"] = value
-                elif key == "stores_tags":
-                    products_dict["shops"] = value
+                """elif key == "stores_tags":
+                    products_dict["shops"] = value"""
                 elif key == "ingredients_text_fr":
                     products_dict["ingredients"] = value
                 elif key == "nutrition_grades":

@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*
 from datas_manager import DatasManager
 from database_manager import DatabaseManager
+from product_list_test import *
 
 
 # Creation of the instances
@@ -22,8 +23,28 @@ def categories_to_database():
     database_manager.products_to_database(products_extraction)"""
 
 
-category_name = DatabaseManager.category_from_database(category_table)
+"""category_name = DatabaseManager.category_from_database(category_table)
 category_url_list = DatasManager.category_to_url(categories_list, category_name)
 products_datas = DatasManager.products_extract(products_lists, category_url_list)
-print(products_datas)
-#DatabaseManager.products_to_database(products_table, products_datas)
+DatabaseManager.products_to_database(products_table, products_datas)"""
+
+list_test = [
+    [{'nom_category': 'Aliments à base de fruits et de légumes', 'shops': "leclercl",
+      'nutriscore': 'c', 'ingredients': '_ noix de cajou _ 25%, _ noix _ 25%, _ noisettes _ 25%, _ amandes _ 25%',
+      'link': 'https://fr.openfoodfacts.org/',
+      'name': 'Noix de cajou & cranberries'},
+     {'nom_category': 'Aliments à base de fruits et de légumes',
+      'ingredients': "conserver frais h de f9gricufture biologiqu Poids Nef A de préférence avan(ié' 25%9/2021 04 76 95 56 70",
+      'link': 'https://fr.openfoodfacts.org/',
+      'name': 'Confiture de framboise', 'nutriscore': 'c', 'shops': "leclerc"},
+     {'nom_category': 'Aliments à base de fruits et de légumes',
+      'link': 'https://fr.openfoodfacts.org/produit/',
+      'name': 'Asperges blanches pelées',
+      'shops': 'leclerc','nutriscore': 'a', 'ingredients': '_ noix de cajou _ 25%, _ noix _ 25%, _ noisettes _ 25%, _ amandes _ 25%'},
+     {'nom_category': 'Aliments à base de fruits et de légumes',
+      'link': 'https://fr.openfoodfacts.org/produit/26042473/',
+      'name': 'Poires Williams au sirop léger', 'ingredients': 'Poires, eau, sucre, acidifiant : acide citrique, antioxydant : acide ascorbique',
+      'shops': 'leclercl', 'nutriscore': 'a'}]
+    ]
+
+DatabaseManager.products_to_database(products_table, list_test)
