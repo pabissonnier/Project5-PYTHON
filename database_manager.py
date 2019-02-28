@@ -1,5 +1,7 @@
 import mysql.connector
 import mysql
+from difflib import SequenceMatcher
+from datas_manager import DatasManager
 
 # Database connection
 cnx = mysql.connector.connect(user="root", password="458127",
@@ -97,22 +99,29 @@ class DatabaseManager:
         tuple_with_str = (str_to_transform, )
         return tuple_with_str
 
-    def products_show(self, category_number, category_list):
+    def category_name_chosen(self, category_number):
+        """ The user selects the number of the category and this returns the name of the category"""
+
+        category_list = DatabaseManager.category_from_database(self)
+
+        category_position = category_number-1
+
+        category_name = category_list[category_position]
+        return category_name
+
+    def products_show(self, category_number):
         """The user selects the category and the products are shown"""
 
         cursor = DatabaseManager.connection_to_database(self)
 
-        category_position = category_number-1 # Va chercher le numéro de la ligne associée
+        category_name = DatabaseManager.category_name_chosen(self, category_number)
 
-        category_name = category_list[category_position] # Va chercher le nom de la catégorie choisie
-        category_name = DatabaseManager.str_to_tuple(self, category_name)
-        print(category_name)
-        print(type(category_name))
+        category_name_tuple = DatabaseManager.str_to_tuple(self, category_name)
 
         query_name_in_db = """SELECT name FROM product WHERE nom_category = %s"""
-        cursor.execute(query_name_in_db, category_name)
+        cursor.execute(query_name_in_db, category_name_tuple)
         my_results = cursor.fetchall()
-        print(my_results)
+
         i = 1
         cat_list = []
         for prod_tuples in my_results:
@@ -125,3 +134,65 @@ class DatabaseManager:
 
         for cat_list2 in cat_list:
             print(cat_list2)
+
+    def products_from_database(self):
+        """ Extract categories from database to get products """
+        cursor = DatabaseManager.connection_to_database(self)
+
+        cursor.execute("SELECT name FROM product")
+
+        my_results = cursor.fetchall()
+
+        products_list = []
+        for prod_tuples in my_results:
+            for value in prod_tuples:
+                products_list.append(value)
+        return products_list
+
+    def product_choice(self, product_number, category_chosen):
+        """ Choice of the product to replace"""
+        cursor = DatabaseManager.connection_to_database(self)
+
+        query = "SELECT name FROM product WHERE nom_category = %s"
+        cursor.execute(query, (category_chosen, ))
+
+        my_results = cursor.fetchall()
+
+        products_list = []
+        for prod_tuples in my_results:
+            for value in prod_tuples:
+                products_list.append(value)
+
+        product_position = product_number-1
+
+        product_name = products_list[product_position]
+        product_name = DatabaseManager.str_to_tuple(self, product_name)
+
+        return product_name
+
+    def extract_products_for_replace(self, category_number):
+        """ Takes products with same category and higer nutriscore"""
+        cursor = DatabaseManager.connection_to_database(self)
+
+        category_name = DatabaseManager.category_name_chosen(self, category_number)
+
+        data = (category_name, 'A')
+
+        query = "SELECT name FROM product WHERE nom_category = %s AND nutriscore = %s"
+        cursor.execute(query, data)
+
+        products_list_A = cursor.fetchall()
+
+        return products_list_A
+
+    def check_name_ratio(self, product_name, product_list_A):
+        """ Checks similar name to repalce a product """
+        products_ratio_list = []
+        for element in product_list_A:
+            for value in element:
+                product_ratio = []
+                product_ratio.append(value)
+                product_score = SequenceMatcher(None, product_name, value).ratio()
+                product_ratio.append(product_score)
+            products_ratio_list.append(product_ratio)
+        print(products_ratio_list)
