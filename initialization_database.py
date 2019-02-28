@@ -24,7 +24,6 @@ def products_to_database():
     products_datas = DatasManager.products_extract(products_lists, category_url_list)
     DatabaseManager.products_to_database(products_table, products_datas)
 
-products_to_database()
 
 
 

@@ -2,7 +2,6 @@
 
 import urllib.request
 import json
-from database_manager import DatabaseManager
 
 
 class DatasManager:
@@ -87,30 +86,4 @@ class DatasManager:
                 products_in_category_list.append(products_dict)
         return products_in_category_list
 
-    """def shops_extract(self, category_name_url_list):
-        products_lists = []
-        for element in category_name_url_list:
-            for key_list, value_list in element.items():
-                page = 1
-                while page <= 1:
-                    category_url = "https://fr.openfoodfacts.org/categorie/{0}/{1}.json".format(value_list, page)
-                    products_json = urllib.request.urlopen(category_url)
-                    products_read = products_json.read()
-                    products_data = json.loads(products_read.decode("utf-8"))
-                    products_in_category_list = DatasManager.shops_shaping(self, products_data)
-                    products_lists.append(products_in_category_list)
-                    page += 1
-        return products_lists
 
-    def shops_shaping(self, products_data):
-        shops_list = []
-        for content in products_data["products"]:
-            shops_dict = {}
-            for key, value in content.items():
-                if key == "product_name":
-                    shops_dict["product_name"] = value
-                elif key == "stores_tags":
-                    value_str = ', '.join(value)
-                    shops_dict["shops"] = value_str
-                shops_list.append(shops_dict)
-        return shops_list"""

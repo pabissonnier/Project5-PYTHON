@@ -1,6 +1,5 @@
 import mysql.connector
 import mysql
-import product_list_test
 
 # Database connection
 cnx = mysql.connector.connect(user="root", password="458127",
@@ -93,20 +92,36 @@ class DatabaseManager:
                 categories_list.append(value)
         return categories_list
 
-    def category_choice(self, category_number, category_list):
-        """The user selects the category"""
+    def str_to_tuple(self, str_to_transform):
+        """ Converts string to tuple to extract from DB"""
+        tuple_with_str = (str_to_transform, )
+        return tuple_with_str
+
+    def products_show(self, category_number, category_list):
+        """The user selects the category and the products are shown"""
 
         cursor = DatabaseManager.connection_to_database(self)
 
-        category_row = category_list[category_number-1]
+        category_position = category_number-1 # Va chercher le numéro de la ligne associée
 
-        category_name = category_row[1]
+        category_name = category_list[category_position] # Va chercher le nom de la catégorie choisie
+        category_name = DatabaseManager.str_to_tuple(self, category_name)
+        print(category_name)
+        print(type(category_name))
 
-        query_name_in_db = """SELECT "name" FROM 'product' WHERE 'nom_category' = %s"""
+        query_name_in_db = """SELECT name FROM product WHERE nom_category = %s"""
         cursor.execute(query_name_in_db, category_name)
-        record = cursor.fetchall()
+        my_results = cursor.fetchall()
+        print(my_results)
+        i = 1
+        cat_list = []
+        for prod_tuples in my_results:
+            for prod_str in prod_tuples:
+                prod_list2 = []
+                prod_list2.append(i)
+                prod_list2.append(prod_str)
+                i += 1
+            cat_list.append(prod_list2)
 
-        print(record)
-
-    def products_show(self, category_number, category_name):
-        """ Show the products after the category choice """
+        for cat_list2 in cat_list:
+            print(cat_list2)
