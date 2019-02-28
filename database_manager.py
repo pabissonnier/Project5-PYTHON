@@ -188,11 +188,26 @@ class DatabaseManager:
     def check_name_ratio(self, product_name, product_list_A):
         """ Checks similar name to repalce a product """
         products_ratio_list = []
-        for element in product_list_A:
-            for value in element:
-                product_ratio = []
-                product_ratio.append(value)
-                product_score = SequenceMatcher(None, product_name, value).ratio()
-                product_ratio.append(product_score)
+        for value in product_list_A:
+            product_name = product_name[0]
+            value = value[0]
+            product_ratio = []
+            product_ratio.append(value)
+            product_score = SequenceMatcher(None, product_name, value).ratio()
+            product_ratio.append(product_score)
             products_ratio_list.append(product_ratio)
         print(products_ratio_list)
+
+    def find_nutriscore(self, product_number, category_chosen):
+        """ Extract nutriscore for a list of products """
+        cursor = DatabaseManager.connection_to_database(self)
+
+
+    def better_nutriscore(self, nutriscore):
+        """ Find products in the same category with better nutriscore """
+        nutriscore_list = ['A', 'B', 'C', 'D', 'E']
+        nutriscore_product = nutriscore
+        nutriscore_position = nutriscore_list.index(nutriscore_product)
+        nutriscore_wanted = nutriscore_list[:nutriscore_position]
+        return nutriscore_wanted
+
