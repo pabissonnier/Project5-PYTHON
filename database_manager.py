@@ -198,14 +198,19 @@ class DatabaseManager:
 
         return products_list_A
 
-
     def better_nutriscore(self, nutriscore):
         """ Find products in the same category with better nutriscore """
         nutriscore_list = ['A', 'B', 'C', 'D', 'E']
-        nutriscore_product = nutriscore
-        nutriscore_position = nutriscore_list.index(nutriscore_product)
-        nutriscore_wanted = nutriscore_list[:nutriscore_position]
-        return nutriscore_wanted
+        better_nutriscores = []
+        nutriscore_product = nutriscore.upper()
+        if nutriscore_product in nutriscore_list[4:]:
+            nutriscore_position = nutriscore_list.index(nutriscore_product)
+            nutriscores_wanted = nutriscore_list[:nutriscore_position]
+            better_nutriscores.append(nutriscores_wanted)
+        elif nutriscore_product == nutriscore_list[0]:
+            nutriscores_wanted = nutriscore_list[0]
+            better_nutriscores.append(nutriscores_wanted)
+        return better_nutriscores
 
     def check_name_ratio(self, product_name, product_list_A):
         """ Checks similar name to repalce a product """

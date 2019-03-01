@@ -38,6 +38,9 @@ def main():
     product_name = DatabaseManager.get_product_name(initialization_database.products_table, product_name_ns)
     product_ns = DatabaseManager.get_product_nutriscore(initialization_database.products_table, product_name_ns)
 
+    # Get list with better nutriscore or equivalent if A
+    better_nutriscore_list = DatabaseManager.better_nutriscore(initialization_database.products_table, product_ns)
+
     # Getting the list of products in the category chosen where nutriscore is higher
     #products_list_A = DatabaseManager.extract_products_for_replace(initialization_database.products_table, category_number)
 
@@ -47,6 +50,7 @@ def main():
 
     print(product_ns)
     print(product_name)
+    print(better_nutriscore_list)
 
 
 if __name__ == "__main__":
