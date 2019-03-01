@@ -230,23 +230,28 @@ class DatabaseManager:
                 products_ratio_list.append(product_ratio)
         return products_ratio_list
 
-    def get_best_nutriscore(self, product_list):
-        """ Gest best nutriscore possible """
+    """def get_best_nutriscore(self, product_list):
+        "Gest best nutriscore possible "
         nutriscore_list = ['A', 'B', 'C', 'D', 'E']
         best_nutriscore_list = []
         for element in product_list:
             for product_tuple in element:
                 best_nutriscore_list.append(product_tuple[1])
         best_nutriscore = min(best_nutriscore_list)
-        return best_nutriscore
+        return best_nutriscore"""
 
-    def show_products_for_replace(self, products_ratio_list):
+    def get_best_ratio(self, products_ratio_list):
+        """ Get best ratio """
+        ratio_list = []
+        for element in products_ratio_list:
+            for product_tuple in element:
+                ratio_list.append(product_tuple[2])
+        best_ratio = max(ratio_list)
+        return best_ratio
+
+    def show_products_for_replace(self, products_ratio_list, best ratio):
         """ Display 1 to 3 products with same name avec higher nutriscore"""
-        results = []
         for element in products_ratio_list:
             for values in element:
-                max_ratio = max(values[2])
-                nutriscore = values[1]
-                pass
-
-
+                if values[2]
+        return products_ratio_list
