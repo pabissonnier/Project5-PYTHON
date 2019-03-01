@@ -40,20 +40,23 @@ def main():
     product_index = DatabaseManager.get_product_index(initialization_database.products_table, product_name_ns)
 
     # Get list with better nutriscore or equivalent if A
-    # better_nutriscore_list = DatabaseManager.better_nutriscore(initialization_database.products_table, product_ns)
+    better_nutriscore_list = DatabaseManager.better_nutriscore(initialization_database.products_table, product_ns)
 
     # Getting the list of products in the category chosen where nutriscore is higher
-    #products_list_A = DatabaseManager.extract_products_for_replace(initialization_database.products_table, category_number)
+    products_list_better_nutriscore = DatabaseManager.extract_products_for_replace(initialization_database.products_table, category_chosen, better_nutriscore_list)
 
-    #product_list = DatabaseManager.products_from_database(initialization_database.products_table)
+    # Getting list with name and name.ratio
+    products_ratio_list = DatabaseManager.check_name_ratio(initialization_database.products_table, product_name, products_list_better_nutriscore)
 
-    #products_ratio_list = DatabaseManager.check_name_ratio(initialization_database.products_table, product_name, products_list_A)
+    # Get 1 to 3 products with description if name.ratio > 0
 
     print(product_name_ns)
     print(product_name)
     print(product_ns)
     print(product_index)
-    #print(better_nutriscore_list)
+    print(better_nutriscore_list)
+    print(products_list_better_nutriscore)
+    print(products_ratio_list)
 
 
 if __name__ == "__main__":

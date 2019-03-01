@@ -185,43 +185,50 @@ class DatabaseManager:
     def better_nutriscore(self, nutriscore):
         """ Find products in the same category with better nutriscore """
         nutriscore_list = ['A', 'B', 'C', 'D', 'E']
-        better_nutriscores = []
+        better_nutriscores_list = []
         nutriscore_product = nutriscore.upper()
-        if nutriscore_product in nutriscore_list[4:]:
+        if nutriscore_product in nutriscore_list[1:4]:
             nutriscore_position = nutriscore_list.index(nutriscore_product)
             nutriscores_wanted = nutriscore_list[:nutriscore_position]
-            better_nutriscores.append(nutriscores_wanted)
+            for elements in nutriscores_wanted:
+                better_nutriscores_list.append(elements)
         elif nutriscore_product == nutriscore_list[0]:
             nutriscores_wanted = nutriscore_list[0]
-            better_nutriscores.append(nutriscores_wanted)
-        return better_nutriscores
+            better_nutriscores_list.append(nutriscores_wanted)
+        return better_nutriscores_list
 
-    def extract_products_for_replace(self, category_number, product_nutriscore):
+    def extract_products_for_replace(self, category_chosen, better_nutriscores_list):
         """ Takes products with same category and higer nutriscore"""
         cursor = DatabaseManager.connection_to_database(self)
 
-        category_name = DatabaseManager.category_name_chosen(self, category_number)
+        products_for_replace = []
 
-        nutriscores_wanted = DatabaseManager.better_nutriscore(self, product_nutriscore)
+        for nutriscore in better_nutriscores_list:
 
-        data = (category_name, nutriscores_wanted)
+            data = (category_chosen, nutriscore)
+            query = "SELECT name, nutriscore FROM product WHERE nom_category = %s AND nutriscore = %s"
+            cursor.execute(query, data)
 
-        query = "SELECT name FROM product WHERE nom_category = %s AND nutriscore = %s"
-        cursor.execute(query, data)
+            products_with_better_nutriscore = cursor.fetchall()
+            products_for_replace.append(products_with_better_nutriscore)
 
-        products_with_better_nutriscore = cursor.fetchall()
+        return products_for_replace
 
-        return products_with_better_nutriscore
-
-    def check_name_ratio(self, product_name, products_with_better_nutriscore):
+    def check_name_ratio(self, product_name, products_for_replace):
         """ Checks similar name to repalce a product """
         products_ratio_list = []
-        for value in products_with_better_nutriscore:
-            product_name = product_name[0]
-            value = value[0]
-            product_ratio = []
-            product_ratio.append(value)
-            product_score = SequenceMatcher(None, product_name, value).ratio()
-            product_ratio.append(product_score)
+        for value in products_for_replace:
+            for element in value:
+                product_ratio = []
+                product_for_replace = element[0]
+                product_score = SequenceMatcher(None, product_name, product_for_replace).ratio()
+                product_ratio_couple = product_for_replace, product_score
+                if product_score > 0:
+                    product_ratio.append(product_ratio_couple)
+
             products_ratio_list.append(product_ratio)
-        print(products_ratio_list)
+        return products_ratio_list
+
+    def show_products_for_replace(self):
+        """ Display 1 to 3 products with same name avec higher nutriscore"""
+        pass
