@@ -37,9 +37,10 @@ def main():
     product_name_ns = DatabaseManager.product_choice(initialization_database.products_table, product_choice_number, category_chosen)
     product_name = DatabaseManager.get_product_name(initialization_database.products_table, product_name_ns)
     product_ns = DatabaseManager.get_product_nutriscore(initialization_database.products_table, product_name_ns)
+    product_index = DatabaseManager.get_product_index(initialization_database.products_table, product_name_ns)
 
     # Get list with better nutriscore or equivalent if A
-    better_nutriscore_list = DatabaseManager.better_nutriscore(initialization_database.products_table, product_ns)
+    # better_nutriscore_list = DatabaseManager.better_nutriscore(initialization_database.products_table, product_ns)
 
     # Getting the list of products in the category chosen where nutriscore is higher
     #products_list_A = DatabaseManager.extract_products_for_replace(initialization_database.products_table, category_number)
@@ -48,9 +49,11 @@ def main():
 
     #products_ratio_list = DatabaseManager.check_name_ratio(initialization_database.products_table, product_name, products_list_A)
 
-    print(product_ns)
+    print(product_name_ns)
     print(product_name)
-    print(better_nutriscore_list)
+    print(product_ns)
+    print(product_index)
+    #print(better_nutriscore_list)
 
 
 if __name__ == "__main__":

@@ -159,44 +159,28 @@ class DatabaseManager:
         my_results = cursor.fetchall()
 
         products_list = []
-        for prod_tuples in my_results:
-            products_list.append(prod_tuples)
-
         product_position = product_number-1
+        for prod_tuples in my_results:
+            prod_tuples = prod_tuples + (product_position,)
+            products_list.append(prod_tuples)
+        product_name_ns_pos = products_list[product_position]
 
-        product_name_ns = products_list[product_position]
-        product_name_ns = DatabaseManager.str_to_tuple(self, product_name_ns)
-
-        return product_name_ns
+        return product_name_ns_pos
 
     def get_product_name(self, product_choice):
         """ Extract nutriscore for a list of products """
-        for tuple in product_choice:
-            product_name = tuple[0]
-            return product_name
+        product_name = product_choice[0]
+        return product_name
 
     def get_product_nutriscore(self, product_choice):
         """ Extract nutriscore for a list of products """
-        for tuple in product_choice:
-            product_nutriscore = tuple[1]
-            return product_nutriscore
+        product_nutriscore = product_choice[1]
+        return product_nutriscore
 
-    def extract_products_for_replace(self, category_number, product_nutriscore):
-        """ Takes products with same category and higer nutriscore"""
-        cursor = DatabaseManager.connection_to_database(self)
-
-        category_name = DatabaseManager.category_name_chosen(self, category_number)
-
-        nutriscores_wanted = DatabaseManager.better_nutriscore(self, product_nutriscore)
-
-        data = (category_name, nutriscores_wanted)
-
-        query = "SELECT name FROM product WHERE nom_category = %s AND nutriscore = %s"
-        cursor.execute(query, data)
-
-        products_list_A = cursor.fetchall()
-
-        return products_list_A
+    def get_product_index(self, product_choice):
+        """ Extract nutriscore for a list of products """
+        product_index = product_choice[2]
+        return product_index
 
     def better_nutriscore(self, nutriscore):
         """ Find products in the same category with better nutriscore """
@@ -212,10 +196,27 @@ class DatabaseManager:
             better_nutriscores.append(nutriscores_wanted)
         return better_nutriscores
 
-    def check_name_ratio(self, product_name, product_list_A):
+    def extract_products_for_replace(self, category_number, product_nutriscore):
+        """ Takes products with same category and higer nutriscore"""
+        cursor = DatabaseManager.connection_to_database(self)
+
+        category_name = DatabaseManager.category_name_chosen(self, category_number)
+
+        nutriscores_wanted = DatabaseManager.better_nutriscore(self, product_nutriscore)
+
+        data = (category_name, nutriscores_wanted)
+
+        query = "SELECT name FROM product WHERE nom_category = %s AND nutriscore = %s"
+        cursor.execute(query, data)
+
+        products_with_better_nutriscore = cursor.fetchall()
+
+        return products_with_better_nutriscore
+
+    def check_name_ratio(self, product_name, products_with_better_nutriscore):
         """ Checks similar name to repalce a product """
         products_ratio_list = []
-        for value in product_list_A:
+        for value in products_with_better_nutriscore:
             product_name = product_name[0]
             value = value[0]
             product_ratio = []
