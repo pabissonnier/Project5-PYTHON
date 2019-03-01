@@ -30,19 +30,24 @@ def main():
     # From category chosen in the category list, showing the list of products
     DatabaseManager.products_show(initialization_database.products_table, category_number)
 
-    products_list_A = DatabaseManager.extract_products_for_replace(initialization_database.products_table, category_number)
-
     product_choice_number = input("\nQuel produit souhaitez-vous remplacer ? Insérez le numéro :")
     product_choice_number = int(product_choice_number)
 
-    product_list = DatabaseManager.products_from_database(initialization_database.products_table)
-    product_name = DatabaseManager.product_choice(initialization_database.products_table, product_choice_number, category_chosen)
+    # Product chosen elements
+    product_name_ns = DatabaseManager.product_choice(initialization_database.products_table, product_choice_number, category_chosen)
+    product_name = DatabaseManager.get_product_name(initialization_database.products_table, product_name_ns)
+    product_ns = DatabaseManager.get_product_nutriscore(initialization_database.products_table, product_name_ns)
 
-    products_ratio_list = DatabaseManager.check_name_ratio(initialization_database.products_table, product_name, products_list_A)
+    # Getting the list of products in the category chosen where nutriscore is higher
+    #products_list_A = DatabaseManager.extract_products_for_replace(initialization_database.products_table, category_number)
 
-    print(products_ratio_list)
+    #product_list = DatabaseManager.products_from_database(initialization_database.products_table)
 
-    print(DatabaseManager.better_nutriscore(initialization_database.products_table, product_choice_number, product_name))
+    #products_ratio_list = DatabaseManager.check_name_ratio(initialization_database.products_table, product_name, products_list_A)
+
+    print(product_ns)
+    print(product_name)
+
 
 if __name__ == "__main__":
     main()
