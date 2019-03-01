@@ -49,6 +49,8 @@ def main():
     products_ratio_list = DatabaseManager.check_name_ratio(initialization_database.products_table, product_name, products_list_better_nutriscore)
 
     # Get 1 to 3 products with description if name.ratio > 0
+    best_nutriscore_of_category = DatabaseManager.get_best_nutriscore(initialization_database.products_table, products_ratio_list)
+
 
     print(product_name_ns)
     print(product_name)
@@ -57,6 +59,7 @@ def main():
     print(better_nutriscore_list)
     print(products_list_better_nutriscore)
     print(products_ratio_list)
+    print(best_nutriscore_of_category)
 
 
 if __name__ == "__main__":

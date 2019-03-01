@@ -187,7 +187,7 @@ class DatabaseManager:
         nutriscore_list = ['A', 'B', 'C', 'D', 'E']
         better_nutriscores_list = []
         nutriscore_product = nutriscore.upper()
-        if nutriscore_product in nutriscore_list[1:4]:
+        if nutriscore_product in nutriscore_list[1:]:
             nutriscore_position = nutriscore_list.index(nutriscore_product)
             nutriscores_wanted = nutriscore_list[:nutriscore_position]
             for elements in nutriscores_wanted:
@@ -221,14 +221,32 @@ class DatabaseManager:
             for element in value:
                 product_ratio = []
                 product_for_replace = element[0]
+                nutriscore = element[1]
                 product_score = SequenceMatcher(None, product_name, product_for_replace).ratio()
-                product_ratio_couple = product_for_replace, product_score
-                if product_score > 0:
+                product_ratio_couple = product_for_replace, nutriscore, product_score
+                if product_score > 0.25:
                     product_ratio.append(product_ratio_couple)
 
-            products_ratio_list.append(product_ratio)
+                products_ratio_list.append(product_ratio)
         return products_ratio_list
 
-    def show_products_for_replace(self):
+    def get_best_nutriscore(self, product_list):
+        """ Gest best nutriscore possible """
+        nutriscore_list = ['A', 'B', 'C', 'D', 'E']
+        best_nutriscore_list = []
+        for element in product_list:
+            for product_tuple in element:
+                best_nutriscore_list.append(product_tuple[1])
+        best_nutriscore = min(best_nutriscore_list)
+        return best_nutriscore
+
+    def show_products_for_replace(self, products_ratio_list):
         """ Display 1 to 3 products with same name avec higher nutriscore"""
-        pass
+        results = []
+        for element in products_ratio_list:
+            for values in element:
+                max_ratio = max(values[2])
+                nutriscore = values[1]
+                pass
+
+
