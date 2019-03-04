@@ -7,9 +7,10 @@ import initialization_database
 def main():
     """Main function"""
 
-    continue_application = 1
+    continue_application = True
 
-    if continue_application:
+    while continue_application:
+
         # ACCUEIL
         print(
             "Bienvenue sur l'application Pur BEURRE !\n"
@@ -22,8 +23,16 @@ def main():
         print(categories_list)
 
         # Getting number for the category
-        category_number = input("\nA quelle catégorie appartient votre produit ? insérez le numéro :")
-        category_number = int(category_number)
+        while True:
+            category_number = input("\nA quelle catégorie appartient votre produit ? insérez le numéro :")
+            try:
+                category_number = int(category_number)
+            except TypeError:
+                print("Insérez un nombre !")
+            if 0 < category_number < 53:
+                break
+            else:
+                print("La valeur ne correspond à aucune catégorie !")
 
         # The category chosen by the user
         category_chosen = DatabaseManager.category_name_chosen(initialization_database.category_table, category_number)
@@ -31,10 +40,25 @@ def main():
         # QUESTION 2
 
         # From category chosen in the category list, showing the list of products
-        DatabaseManager.products_show(initialization_database.products_table, category_number)
+        products_whole_list = DatabaseManager.products_show(initialization_database.products_table, category_number)
+        for cat_list2 in products_whole_list:
+            print(cat_list2)
 
-        product_choice_number = input("\nQuel produit souhaitez-vous remplacer ? Insérez le numéro :")
-        product_choice_number = int(product_choice_number)
+        # Get number of indexes in the product list
+        last_product_number = DatabaseManager.get_number_products(initialization_database.products_table, products_whole_list)
+        print(last_product_number)
+
+        while True:
+            product_choice_number = input("\nQuel produit souhaitez-vous remplacer ? Insérez le numéro :")
+            try:
+                product_choice_number = int(product_choice_number)
+            except TypeError:
+                print("Insérez un nombre !")
+
+            if 0 < product_choice_number < last_product_number:
+                break
+            else:
+                print("La valeur ne correspond à aucun produit !")
 
         # Product chosen elements
         product_name_ns = DatabaseManager.product_choice(initialization_database.products_table, product_choice_number, category_chosen)
@@ -74,7 +98,7 @@ def main():
         DatabaseManager.save_product_database(initialization_database.products_table, result)
         DatabaseManager.show_products_history(initialization_database.products_table)
 
-        continue_application == game.continue_game()
+        continue_application = game.continue_game()
 
 
 if __name__ == "__main__":

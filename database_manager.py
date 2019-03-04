@@ -134,8 +134,12 @@ class DatabaseManager:
                 i += 1
             cat_list.append(prod_list2)
 
-        for cat_list2 in cat_list:
-            print(cat_list2)
+        return cat_list
+
+    def get_number_products(self, products_whole_list):
+        """ Get maximum number of products in list """
+        for product in products_whole_list[-1]:
+            return product
 
     def products_from_database(self):
         """ Extract categories from database to get products """
@@ -240,6 +244,7 @@ class DatabaseManager:
         for element in product_list:
             for product_tuple in element:
                 best_nutriscore_list.append(product_tuple[1])
+
         best_nutriscore = min(best_nutriscore_list)
         return best_nutriscore
 
