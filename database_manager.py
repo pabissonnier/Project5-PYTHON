@@ -318,3 +318,24 @@ class DatabaseManager:
 
     def show_products_history(self):
         """ Show products from the user database """
+        cursor = DatabaseManager.connection_to_database(self)
+
+        answer = input("\nTapez 1 pour voir l'historique de vos produits :")
+        answer = int(answer)
+
+        if answer == 1:
+            cursor.execute("SELECT * FROM usertable")
+
+            my_results = cursor.fetchall()
+
+            for element in my_results:
+                name_results = element[0]
+                ingredients_results = element[1]
+                shops_results = element[2]
+                link_results = element[3]
+                nutriscore_results = element[4]
+
+                results = "\nNom : {0}\nIngrédients : {1}\nNutriscore :{2}\nShops : {3}" \
+                          "\nLink : {4}\n".format(name_results, ingredients_results, nutriscore_results, shops_results, link_results)
+
+                print(results)

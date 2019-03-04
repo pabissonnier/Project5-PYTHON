@@ -69,6 +69,7 @@ def main():
     print(show_result)
 
     DatabaseManager.save_product_database(initialization_database.products_table, result)
+    DatabaseManager.show_products_history(initialization_database.products_table)
 
 if __name__ == "__main__":
     main()
