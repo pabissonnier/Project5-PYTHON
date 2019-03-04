@@ -53,9 +53,10 @@ def main():
     products_list_best_nutriscore = DatabaseManager.list_products_best_nutriscore(initialization_database.products_table, products_ratio_list, best_nutriscore_of_category)
     best_ratio = DatabaseManager.get_best_ratio(initialization_database.products_table, products_list_best_nutriscore)
     results_list = DatabaseManager.get_products_for_replace(initialization_database.products_table, products_list_best_nutriscore, best_ratio)
-    results = DatabaseManager.show_result(initialization_database.products_table, results_list)
+    result = DatabaseManager.get_result(initialization_database.products_table, results_list)
+    show_result = DatabaseManager.show_result(initialization_database.products_table, result)
 
-    """print(product_name_ns)
+    print(product_name_ns)
     print(product_name)
     print(product_ns)
     print(product_index)
@@ -64,9 +65,10 @@ def main():
     print(best_nutriscore_of_category)
     print(best_ratio)
     print(products_list_best_nutriscore)
-    print(results_list)"""
-    print(results)
+    print(results_list)
+    print(show_result)
 
+    DatabaseManager.save_product_database(initialization_database.products_table, result)
 
 if __name__ == "__main__":
     main()

@@ -232,7 +232,7 @@ class DatabaseManager:
         return products_ratio_list
 
     def get_best_nutriscore(self, product_list):
-        "Gest best nutriscore possible "
+        "Get best nutriscore possible "
         nutriscore_list = ['A', 'B', 'C', 'D', 'E']
         best_nutriscore_list = []
         for element in product_list:
@@ -264,8 +264,8 @@ class DatabaseManager:
             if element[2] == best_ratio:
                 return element
 
-    def show_result(self, product_for_replace):
-        """ Show product for replacement with infos """
+    def get_result(self, product_for_replace):
+        """ Get product for replacement with infos """
         cursor = DatabaseManager.connection_to_database(self)
 
         name = product_for_replace[0]
@@ -279,6 +279,10 @@ class DatabaseManager:
 
         my_results = cursor.fetchall()
 
+        return my_results
+
+    def show_result(self, my_results):
+        """ Show results """
         for element in my_results:
             name_results = element[0]
             ingredients_results = element[1]
@@ -291,5 +295,26 @@ class DatabaseManager:
 
             return results
 
-    def save_product_database(self):
+    def save_product_database(self, my_result):
         """ User can save product to the database """
+        cursor = DatabaseManager.connection_to_database(self)
+
+        for element in my_result:
+            name_results = element[0]
+            ingredients_results = element[1]
+            nutriscore_results = element[2]
+            shops_results = element[3]
+            link_results = element[4]
+
+        answer = input("\nVoulez-vous sauvegarder ce produit ? Tapez 1 pour oui et 0 pour non :")
+        answer = int(answer)
+        if answer == 1:
+            query = """INSERT INTO usertable (name, ingredients, nutriscore, shops, link) VALUES (%s, %s, %s, %s, %s)"""
+            cursor.execute(query, (name_results, ingredients_results, nutriscore_results, shops_results, link_results))
+
+            cnx.commit()
+
+        print("Produit enregistré !")
+
+    def show_products_history(self):
+        """ Show products from the user database """
