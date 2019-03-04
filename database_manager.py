@@ -1,7 +1,9 @@
 import mysql.connector
 import mysql
 from difflib import SequenceMatcher
-from datas_manager import DatasManager
+from mysql.connector import Error
+from mysql.connector import errorcode
+
 
 # Database connection
 cnx = mysql.connector.connect(user="root", password="458127",
@@ -297,30 +299,41 @@ class DatabaseManager:
 
     def save_product_database(self, my_result):
         """ User can save product to the database """
-        cursor = DatabaseManager.connection_to_database(self)
+        try:
+            cursor = DatabaseManager.connection_to_database(self)
 
-        for element in my_result:
-            name_results = element[0]
-            ingredients_results = element[1]
-            nutriscore_results = element[2]
-            shops_results = element[3]
-            link_results = element[4]
+            for element in my_result:
+                name_results = element[0]
+                ingredients_results = element[1]
+                nutriscore_results = element[2]
+                shops_results = element[3]
+                link_results = element[4]
 
-        answer = input("\nVoulez-vous sauvegarder ce produit ? Tapez 1 pour oui et 0 pour non :")
-        answer = int(answer)
-        if answer == 1:
-            query = """INSERT INTO usertable (name, ingredients, nutriscore, shops, link) VALUES (%s, %s, %s, %s, %s)"""
-            cursor.execute(query, (name_results, ingredients_results, nutriscore_results, shops_results, link_results))
+            answer = input("\nVoulez-vous sauvegarder ce produit ? Tapez 1 pour oui et 0 pour non :")
+            answer = int(answer)
+            if answer == 1:
+                query = """INSERT INTO usertable (name, ingredients, nutriscore, shops, link) VALUES (%s, %s, %s, %s, %s)"""
+                cursor.execute(query, (name_results, ingredients_results, nutriscore_results, shops_results, link_results))
 
-            cnx.commit()
+                cnx.commit()
 
-        print("Produit enregistré !")
+                print("Produit enregistré !")
+
+        except mysql.connector.Error:
+            cnx.rollback()
+            print("Import du produit impossible")
+
+        finally:
+            if cnx.is_connected():
+                cursor.close()
+                cnx.close()
+
 
     def show_products_history(self):
         """ Show products from the user database """
         cursor = DatabaseManager.connection_to_database(self)
 
-        answer = input("\nTapez 1 pour voir l'historique de vos produits :")
+        answer = input("\nTapez 1 pour voir l'historique de vos produits (sinon tapez autre chose) :")
         answer = int(answer)
 
         if answer == 1:
@@ -339,3 +352,6 @@ class DatabaseManager:
                           "\nLink : {4}\n".format(name_results, ingredients_results, nutriscore_results, shops_results, link_results)
 
                 print(results)
+
+        else:
+            pass
