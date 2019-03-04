@@ -45,22 +45,27 @@ def main():
     # Getting the list of products in the category chosen where nutriscore is higher
     products_list_better_nutriscore = DatabaseManager.extract_products_for_replace(initialization_database.products_table, category_chosen, better_nutriscore_list)
 
-    # Getting list with name and name.ratio
+    # Getting list with name, nutriscore and name.ratio
     products_ratio_list = DatabaseManager.check_name_ratio(initialization_database.products_table, product_name, products_list_better_nutriscore)
 
-    # Get 1 to 3 products with description if name.ratio > 0
-    #best_nutriscore_of_category = DatabaseManager.get_best_nutriscore(initialization_database.products_table, products_ratio_list)
-    results_list = DatabaseManager.show_products_for_replace(initialization_database.products_table, products_ratio_list, best_nutriscore_of_category)
+    # Get 1 to 3 products with description with best ratio
+    best_nutriscore_of_category = DatabaseManager.get_best_nutriscore(initialization_database.products_table, products_ratio_list)
+    products_list_best_nutriscore = DatabaseManager.list_products_best_nutriscore(initialization_database.products_table, products_ratio_list, best_nutriscore_of_category)
+    best_ratio = DatabaseManager.get_best_ratio(initialization_database.products_table, products_list_best_nutriscore)
+    results_list = DatabaseManager.get_products_for_replace(initialization_database.products_table, products_list_best_nutriscore, best_ratio)
+    results = DatabaseManager.show_result(initialization_database.products_table, results_list)
 
-    print(product_name_ns)
+    """print(product_name_ns)
     print(product_name)
     print(product_ns)
     print(product_index)
     print(better_nutriscore_list)
-    print(products_list_better_nutriscore)
     print(products_ratio_list)
     print(best_nutriscore_of_category)
-    print(results_list)
+    print(best_ratio)
+    print(products_list_best_nutriscore)
+    print(results_list)"""
+    print(results)
 
 
 if __name__ == "__main__":

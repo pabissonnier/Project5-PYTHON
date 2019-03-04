@@ -153,7 +153,7 @@ class DatabaseManager:
         """ Choice of the product to replace"""
         cursor = DatabaseManager.connection_to_database(self)
 
-        query = "SELECT name, nutriscore FROM product WHERE nom_category = %s"
+        query = "SELECT name, nutriscore, link FROM product WHERE nom_category = %s"
         cursor.execute(query, (category_chosen, ))
 
         my_results = cursor.fetchall()
@@ -206,7 +206,7 @@ class DatabaseManager:
         for nutriscore in better_nutriscores_list:
 
             data = (category_chosen, nutriscore)
-            query = "SELECT name, nutriscore FROM product WHERE nom_category = %s AND nutriscore = %s"
+            query = "SELECT name, nutriscore, link FROM product WHERE nom_category = %s AND nutriscore = %s"
             cursor.execute(query, data)
 
             products_with_better_nutriscore = cursor.fetchall()
@@ -222,15 +222,16 @@ class DatabaseManager:
                 product_ratio = []
                 product_for_replace = element[0]
                 nutriscore = element[1]
+                link = element[2]
                 product_score = SequenceMatcher(None, product_name, product_for_replace).ratio()
-                product_ratio_couple = product_for_replace, nutriscore, product_score
+                product_ratio_couple = product_for_replace, nutriscore, link, product_score
                 if product_score > 0.25:
                     product_ratio.append(product_ratio_couple)
 
                 products_ratio_list.append(product_ratio)
         return products_ratio_list
 
-    """def get_best_nutriscore(self, product_list):
+    def get_best_nutriscore(self, product_list):
         "Gest best nutriscore possible "
         nutriscore_list = ['A', 'B', 'C', 'D', 'E']
         best_nutriscore_list = []
@@ -238,20 +239,57 @@ class DatabaseManager:
             for product_tuple in element:
                 best_nutriscore_list.append(product_tuple[1])
         best_nutriscore = min(best_nutriscore_list)
-        return best_nutriscore"""
+        return best_nutriscore
 
-    def get_best_ratio(self, products_ratio_list):
+    def list_products_best_nutriscore(self, products_ratio_list, best_nutriscore):
+        """ Update list with only """
+        products_list_best_nutriscore = []
+        for element in products_ratio_list:
+            for values in element:
+                if values[1] == best_nutriscore:
+                    products_list_best_nutriscore.append(values)
+        return products_list_best_nutriscore
+
+    def get_best_ratio(self, products_list_best_nutriscore):
         """ Get best ratio """
         ratio_list = []
-        for element in products_ratio_list:
-            for product_tuple in element:
-                ratio_list.append(product_tuple[2])
+        for element in products_list_best_nutriscore:
+            ratio_list.append(element[2])
         best_ratio = max(ratio_list)
         return best_ratio
 
-    def show_products_for_replace(self, products_ratio_list, best ratio):
-        """ Display 1 to 3 products with same name avec higher nutriscore"""
-        for element in products_ratio_list:
-            for values in element:
-                if values[2]
-        return products_ratio_list
+    def get_products_for_replace(self, products_list_best_nutriscore, best_ratio):
+        """ Get product with same name with higher nutriscore"""
+        for element in products_list_best_nutriscore:
+            if element[2] == best_ratio:
+                return element
+
+    def show_result(self, product_for_replace):
+        """ Show product for replacement with infos """
+        cursor = DatabaseManager.connection_to_database(self)
+
+        name = product_for_replace[0]
+        nutriscore = product_for_replace[1]
+        link = product_for_replace[2]
+
+        datas = (name, nutriscore, link)
+
+        query = "SELECT name, ingredients, nutriscore, shops, link FROM product WHERE name = %s AND nutriscore = %s AND link = %s"
+        cursor.execute(query, datas)
+
+        my_results = cursor.fetchall()
+
+        for element in my_results:
+            name_results = element[0]
+            ingredients_results = element[1]
+            nutriscore_results = element[2]
+            shops_results = element[3]
+            link_results = element[4]
+
+            results = "\nVoici le produit se rapprochant le plus du vôtre avec de meilleures qualités nutritionnelles :\n\n" \
+                      "Nom : {0}\nIngrédients : {1}\nNutriscore :{2}\nShops : {3}\nLink : {4}".format(name_results, ingredients_results, nutriscore_results, shops_results, link_results)
+
+            return results
+
+    def save_product_database(self):
+        """ User can save product to the database """
