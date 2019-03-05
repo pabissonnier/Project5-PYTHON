@@ -191,8 +191,8 @@ class DatabaseManager:
         nutriscore_list = ['A', 'B', 'C', 'D', 'E']
         better_nutriscores_list = []
         nutriscore_product = nutriscore.upper()
-        if nutriscore_product in nutriscore_list[1:]:
-            nutriscore_position = nutriscore_list.index(nutriscore_product)
+        if nutriscore_product in nutriscore_list:
+            nutriscore_position = nutriscore_list.index(nutriscore_product) + 1
             nutriscores_wanted = nutriscore_list[:nutriscore_position]
             for elements in nutriscores_wanted:
                 better_nutriscores_list.append(elements)
@@ -237,7 +237,6 @@ class DatabaseManager:
 
     def get_best_nutriscore(self, product_list):
         "Get best nutriscore possible "
-        nutriscore_list = ['A', 'B', 'C', 'D', 'E']
         best_nutriscore_list = []
         for element in product_list:
             for product_tuple in element:
@@ -326,15 +325,16 @@ class DatabaseManager:
             cnx.rollback()
             print("Import du produit impossible")
 
-        finally:
+        """finally:
             if cnx.is_connected():
-                cursor.close()
+                cursor.close()"""
 
     def show_products_history(self):
         """ Show products from the user database """
         cursor = DatabaseManager.connection_to_database(self)
 
         answer = input("\nTapez 1 pour voir l'historique de vos produits (sinon tapez autre chose) :")
+        answer = int(answer)
 
         if answer == 1:
             cursor.execute("SELECT * FROM usertable")
@@ -355,3 +355,7 @@ class DatabaseManager:
 
         else:
             pass
+
+
+
+

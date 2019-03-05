@@ -35,7 +35,6 @@ def main():
 
         # The category chosen by the user
         category_chosen = DatabaseManager.category_name_chosen(initialization_database.category_table, category_number)
-        print(category_chosen)
 
         # QUESTION 2
 
@@ -82,7 +81,7 @@ def main():
         result = DatabaseManager.get_result(initialization_database.products_table, results_list)
         show_result = DatabaseManager.show_result(initialization_database.products_table, result)
 
-        """print(product_name_ns)
+        print(product_name_ns)
         print(product_name)
         print(product_ns)
         print(product_index)
@@ -91,7 +90,7 @@ def main():
         print(best_nutriscore_of_category)
         print(best_ratio)
         print(products_list_best_nutriscore)
-        print(results_list)"""
+        print(results_list)
         print(show_result)
 
         DatabaseManager.save_product_database(initialization_database.products_table, result)
