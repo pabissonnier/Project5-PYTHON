@@ -19,8 +19,7 @@ def main():
         # QUESTION 1
 
         # Showing list of categories
-        categories_list = DatabaseManager.categories_show(initialization_database.category_table)
-        print(categories_list)
+        DatabaseManager.categories_show(initialization_database.category_table)
 
         # Getting number for the category
         while True:
@@ -36,17 +35,17 @@ def main():
 
         # The category chosen by the user
         category_chosen = DatabaseManager.category_name_chosen(initialization_database.category_table, category_number)
+        print(category_chosen)
 
         # QUESTION 2
 
         # From category chosen in the category list, showing the list of products
         products_whole_list = DatabaseManager.products_show(initialization_database.products_table, category_number)
-        for cat_list2 in products_whole_list:
-            print(cat_list2)
+        for element in products_whole_list:
+            print(element)
 
         # Get number of indexes in the product list
         last_product_number = DatabaseManager.get_number_products(initialization_database.products_table, products_whole_list)
-        print(last_product_number)
 
         while True:
             product_choice_number = input("\nQuel produit souhaitez-vous remplacer ? Insérez le numéro :")
@@ -83,7 +82,7 @@ def main():
         result = DatabaseManager.get_result(initialization_database.products_table, results_list)
         show_result = DatabaseManager.show_result(initialization_database.products_table, result)
 
-        print(product_name_ns)
+        """print(product_name_ns)
         print(product_name)
         print(product_ns)
         print(product_index)
@@ -92,7 +91,7 @@ def main():
         print(best_nutriscore_of_category)
         print(best_ratio)
         print(products_list_best_nutriscore)
-        print(results_list)
+        print(results_list)"""
         print(show_result)
 
         DatabaseManager.save_product_database(initialization_database.products_table, result)

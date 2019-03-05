@@ -10,4 +10,5 @@ def continue_game():
         return True
 
     elif once_again == 0:
+        print("\nMerci pour votre visite et à bientôt !")
         return False

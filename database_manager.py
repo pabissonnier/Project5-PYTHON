@@ -1,8 +1,6 @@
 import mysql.connector
 import mysql
 from difflib import SequenceMatcher
-from mysql.connector import Error
-from mysql.connector import errorcode
 
 
 # Database connection
@@ -125,16 +123,16 @@ class DatabaseManager:
         my_results = cursor.fetchall()
 
         i = 1
-        cat_list = []
+        prod_list = []
         for prod_tuples in my_results:
             for prod_str in prod_tuples:
                 prod_list2 = []
                 prod_list2.append(i)
                 prod_list2.append(prod_str)
                 i += 1
-            cat_list.append(prod_list2)
+            prod_list.append(prod_list2)
 
-        return cat_list
+        return prod_list
 
     def get_number_products(self, products_whole_list):
         """ Get maximum number of products in list """
@@ -331,15 +329,12 @@ class DatabaseManager:
         finally:
             if cnx.is_connected():
                 cursor.close()
-                cnx.close()
-
 
     def show_products_history(self):
         """ Show products from the user database """
         cursor = DatabaseManager.connection_to_database(self)
 
         answer = input("\nTapez 1 pour voir l'historique de vos produits (sinon tapez autre chose) :")
-        answer = int(answer)
 
         if answer == 1:
             cursor.execute("SELECT * FROM usertable")
