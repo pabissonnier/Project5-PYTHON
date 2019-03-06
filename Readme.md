@@ -1,36 +1,31 @@
 # PUR BEURRE APPICATION
 
 ## OBJECTIFS DE CETTE APPLICATION:
-Fournir à l'utilisateur des alternatives plus saines aux produits alimentaires qu'il achète dans le commerce.
+Fournir ï¿½ l'utilisateur des alternatives plus saines aux produits alimentaires qu'il achï¿½te dans le commerce.
 
 
 ## USER STORY:
-Informations sur l'utilisation de notre application. Celle-ci se déroule en 5 étapes.
+Informations sur l'utilisation de notre application. Celle-ci se dï¿½roule en 5 ï¿½tapes.
 
-### 1ère étape
-L'utilisateur ouvre l'application, une console apparaît alors (les instructions sont indiquées au début).
-Une première question apparaît avec des choix possibles:
-"A quelle catégorie de produits votre produit appartient-il?"
-Une liste de 50 catégories numérotées apparaît triés par ordre alphabétique.
-A côté de la question, l'utilisateur inscrit le numéro de la catégorie.
+### 1ï¿½re ï¿½tape
+L'utilisateur ouvre l'application, une console apparaï¿½t alors (les instructions sont indiquï¿½es au dï¿½but).
+Une premiï¿½re question apparaï¿½t avec des choix possibles:
+"A quelle catï¿½gorie de produits votre produit appartient-il?"
+Une liste de 50 catï¿½gories numï¿½rotï¿½es apparaï¿½t triï¿½s par ordre alphabï¿½tique.
+A cï¿½tï¿½ de la question, l'utilisateur inscrit le numï¿½ro de la catï¿½gorie.
 
-### 2ème étape
-Une fois la catégorie renseignée, une autre question apparaît:
+### 2ï¿½me ï¿½tape
+Une fois la catï¿½gorie renseignï¿½e, une autre question apparaï¿½t:
 "Quel type d'aliment souhaitez-vous remplacer?"
-Une liste de types de produits numérotés apparaît en dessous triés par ordre alphabétique.
-A côté de la question, il inscrit le numéro du type de produit.
+Une liste de types de produits numï¿½rotï¿½s apparaï¿½t en dessous.
+A cï¿½tï¿½ de la question, il inscrit le numï¿½ro du type de produit.
 
-### 3ème étape
-Une fois le type de produit renseigné, une autre question apparaît:
-"Avez-vous des allergies alimentaires ?"
-Une liste numérotée d'allergies apparaît en dessous triés par ordre alphabétique.
-A côté de la question, il inscrit le numéro de l'allergie.
+### 3ï¿½me ï¿½tape
+Une liste de 1 produit apparaï¿½t ayant de bonnes qualitï¿½s nutritionnelles (NutriScore supÃ©rieur ou similaire si ce n'est pas possible) ainsi que les informations utiles.
 
-### 4ème étape
-Une fois l'allergie renseignée, une liste de 1 à 3 produits apparaît ayant de bonnes qualités nutritionnelles (NutriScore de A ou B si il n'y a pas de A disponible).
+### 4ï¿½me ï¿½tape
+L'utilisateur peut enregistrer le produit.
 
-### 5ème étape
-L'utilisateur peut enregistrer le ou les produits.
-
-
+### 5ï¿½me ï¿½tape
+L'utilisateur peut voir son historique de produits enregistrÃ©s (possible aussi au dÃ©but de l'application).
 
