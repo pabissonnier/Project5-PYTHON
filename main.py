@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*
-import game
+import application
 from database_manager import DatabaseManager
 import initialization_database
 
@@ -81,7 +81,7 @@ def main():
         result = DatabaseManager.get_result(initialization_database.products_table, results_list)
         show_result = DatabaseManager.show_result(initialization_database.products_table, result)
 
-        print(product_name_ns)
+        """print(product_name_ns)
         print(product_name)
         print(product_ns)
         print(product_index)
@@ -90,13 +90,13 @@ def main():
         print(best_nutriscore_of_category)
         print(best_ratio)
         print(products_list_best_nutriscore)
-        print(results_list)
+        print(results_list)"""
         print(show_result)
 
         DatabaseManager.save_product_database(initialization_database.products_table, result)
         DatabaseManager.show_products_history(initialization_database.products_table)
 
-        continue_application = game.continue_game()
+        continue_application = application.continue_application()
 
 
 if __name__ == "__main__":

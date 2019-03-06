@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*
 
 
-def continue_game():
+def continue_application():
     """ Continue game or not """
     once_again = input("Voulez-vous continuer ? Tapez 1 pour oui et 0 pour non :")
     once_again = int(once_again)
