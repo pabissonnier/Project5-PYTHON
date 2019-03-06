@@ -16,6 +16,20 @@ def main():
             "Bienvenue sur l'application Pur BEURRE !\n"
             "Choisissez un produit que vous souhaitez remplacer par un substitut plus sain...\n ")
 
+        while True:
+            start_or_history = input("Tapez 1 pour commencer ou 0 pour voir votre historique :")
+            try:
+                start_or_history = int(start_or_history)
+            except TypeError:
+                print("Insérez un nombre !")
+            if start_or_history == 0:
+                DatabaseManager.show_products_history_begin(initialization_database.products_table, start_or_history)
+                break
+            elif start_or_history == 1:
+                break
+            else:
+                print("La valeur ne correspond pas !")
+
         # QUESTION 1
 
         # Showing list of categories
@@ -94,7 +108,7 @@ def main():
         print(show_result)
 
         DatabaseManager.save_product_database(initialization_database.products_table, result)
-        DatabaseManager.show_products_history(initialization_database.products_table)
+        DatabaseManager.show_products_history_end(initialization_database.products_table)
 
         continue_application = application.continue_application()
 

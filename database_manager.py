@@ -329,8 +329,8 @@ class DatabaseManager:
             if cnx.is_connected():
                 cursor.close()"""
 
-    def show_products_history(self):
-        """ Show products from the user database """
+    def show_products_history_end(self):
+        """ Show products from the user database at the end """
         cursor = DatabaseManager.connection_to_database(self)
 
         answer = input("\nTapez 1 pour voir l'historique de vos produits (sinon tapez autre chose) :")
@@ -341,21 +341,31 @@ class DatabaseManager:
 
             my_results = cursor.fetchall()
 
-            for element in my_results:
-                name_results = element[0]
-                ingredients_results = element[1]
-                shops_results = element[2]
-                link_results = element[3]
-                nutriscore_results = element[4]
-
-                results = "\nNom : {0}\nIngrédients : {1}\nNutriscore :{2}\nShops : {3}" \
-                          "\nLink : {4}\n".format(name_results, ingredients_results, nutriscore_results, shops_results, link_results)
-
-                print(results)
+            DatabaseManager.show_history(self, my_results)
 
         else:
             pass
 
+    def show_products_history_begin(self, answer):
+        """ Show products from the user database at the beggining """
+        cursor = DatabaseManager.connection_to_database(self)
 
+        cursor.execute("SELECT * FROM usertable")
 
+        my_results = cursor.fetchall()
 
+        DatabaseManager.show_history(self, my_results)
+
+    def show_history(self, my_results):
+        """ Show history """
+        for element in my_results:
+            name_results = element[0]
+            ingredients_results = element[1]
+            shops_results = element[2]
+            link_results = element[3]
+            nutriscore_results = element[4]
+
+            results = "\nNom : {0}\nIngrédients : {1}\nNutriscore :{2}\nShops : {3}" \
+                      "\nLink : {4}\n".format(name_results, ingredients_results, nutriscore_results, shops_results, link_results)
+
+            print(results)
