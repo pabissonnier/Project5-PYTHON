@@ -325,9 +325,6 @@ class DatabaseManager:
             cnx.rollback()
             print("Import du produit impossible")
 
-        """finally:
-            if cnx.is_connected():
-                cursor.close()"""
 
     def show_products_history_end(self):
         """ Show products from the user database at the end """
@@ -346,7 +343,7 @@ class DatabaseManager:
         else:
             pass
 
-    def show_products_history_begin(self, answer):
+    def show_products_history_begin(self):
         """ Show products from the user database at the beggining """
         cursor = DatabaseManager.connection_to_database(self)
 

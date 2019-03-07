@@ -11,7 +11,7 @@ def main():
 
     while continue_application:
 
-        # ACCUEIL
+        # WELCOME
         print(
             "Bienvenue sur l'application Pur BEURRE !\n"
             "Choisissez un produit que vous souhaitez remplacer par un substitut plus sain...\n ")
@@ -23,7 +23,7 @@ def main():
             except TypeError:
                 print("Insérez un nombre !")
             if start_or_history == 0:
-                DatabaseManager.show_products_history_begin(initialization_database.products_table, start_or_history)
+                DatabaseManager.show_products_history_begin(initialization_database.products_table)
                 break
             elif start_or_history == 1:
                 break
@@ -95,16 +95,6 @@ def main():
         result = DatabaseManager.get_result(initialization_database.products_table, results_list)
         show_result = DatabaseManager.show_result(initialization_database.products_table, result)
 
-        """print(product_name_ns)
-        print(product_name)
-        print(product_ns)
-        print(product_index)
-        print(better_nutriscore_list)
-        print(products_ratio_list)
-        print(best_nutriscore_of_category)
-        print(best_ratio)
-        print(products_list_best_nutriscore)
-        print(results_list)"""
         print(show_result)
 
         DatabaseManager.save_product_database(initialization_database.products_table, result)
